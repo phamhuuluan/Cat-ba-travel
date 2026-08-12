@@ -1,0 +1,2914 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#1b4332" />
+  <title>Kế hoạch du lịch Cát Bà — Nhà Hìn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f3eb;
+      --warm-white: #fbf9f5;
+      --sand: #e8dfd0;
+      --sand-deep: #d4c4ae;
+      --deep-green: #1b4332;
+      --deep-green-soft: #2d6a4f;
+      --charcoal: #2c2c2c;
+      --charcoal-muted: #5a5a5a;
+      --muted-blue: #4a6fa5;
+      --terracotta: #c4785a;
+      --terracotta-soft: #d49278;
+      --line: rgba(44, 44, 44, 0.1);
+      --shadow: 0 12px 40px rgba(27, 67, 50, 0.08);
+      --radius: 18px;
+      --max: 1280px;
+      --nav-h: 64px;
+      --day-nav-h: 56px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-h) + var(--day-nav-h) + 16px + var(--safe-top));
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      max-width: 100vw;
+      padding-bottom: var(--safe-bottom);
+    }
+
+    /* Tránh trang trắng nếu JS chưa chạy / lỗi trên mobile */
+    .boot-fallback {
+      display: none;
+      padding: 2rem 1.25rem;
+      text-align: center;
+      color: var(--charcoal-muted);
+      font-size: 0.95rem;
+    }
+    body:not(.is-ready) .boot-fallback { display: block; }
+    body:not(.is-ready) main,
+    body:not(.is-ready) .day-nav-wrap,
+    body:not(.is-ready) footer { display: none; }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: var(--muted-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+    }
+
+    /* ===== TOP NAV ===== */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: calc(var(--nav-h) + var(--safe-top));
+      padding-top: var(--safe-top);
+      background: rgba(247, 243, 235, 0.96);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topnav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--deep-green);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--deep-green);
+      color: var(--cream);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .topnav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 0.25rem;
+    }
+
+    .nav-links a {
+      color: var(--charcoal-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--sand);
+      color: var(--deep-green);
+      text-decoration: none;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--deep-green);
+      background: transparent;
+      transition: background 0.2s;
+    }
+
+    .icon-btn:hover { background: var(--sand); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--deep-green);
+      color: var(--cream);
+    }
+
+    .btn-primary:hover {
+      background: var(--deep-green-soft);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--deep-green);
+      border: 1px solid var(--sand-deep);
+    }
+
+    .btn-ghost:hover {
+      background: var(--sand);
+      text-decoration: none;
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8rem;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: min(88vh, 760px);
+      min-height: min(88dvh, 760px);
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 0 4.5rem;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(27, 67, 50, 0.15) 0%, rgba(27, 67, 50, 0.72) 55%, rgba(27, 67, 50, 0.92) 100%),
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(74, 111, 165, 0.45), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(196, 120, 90, 0.35), transparent 50%),
+        linear-gradient(145deg, #1b4332 0%, #2d6a4f 40%, #4a6fa5 100%);
+      color: var(--cream);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-wave {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 72px;
+      color: var(--cream);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 1.25rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .hero h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.4rem, 7vw, 4.6rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 14ch;
+      margin-bottom: 1rem;
+    }
+
+    .hero-dest {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.92;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    .hero .btn-primary {
+      background: var(--cream);
+      color: var(--deep-green);
+    }
+
+    .hero .btn-primary:hover { background: #fff; }
+
+    .hero .btn-ghost {
+      border-color: rgba(247, 243, 235, 0.4);
+      color: var(--cream);
+    }
+
+    .hero .btn-ghost:hover { background: rgba(247, 243, 235, 0.12); }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-head {
+      margin-bottom: 2rem;
+      max-width: 40rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-head h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      color: var(--deep-green);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-head p {
+      color: var(--charcoal-muted);
+      font-size: 1.02rem;
+    }
+
+    /* ===== OVERVIEW CARDS ===== */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+
+    .stat-card {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.15rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--charcoal-muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .stat-card .value {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      line-height: 1.25;
+    }
+
+    .stat-card .hint {
+      margin-top: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--charcoal-muted);
+    }
+
+    /* ===== DAY NAV ===== */
+    .day-nav-wrap {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--safe-top));
+      z-index: 90;
+      background: rgba(247, 243, 235, 0.96);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      padding: 0.65rem 0;
+    }
+
+    .day-nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+
+    .day-nav::-webkit-scrollbar { display: none; }
+
+    .day-chip {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.1rem;
+      padding: 0.55rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--warm-white);
+      color: var(--charcoal-muted);
+      transition: all 0.2s;
+      min-width: 108px;
+    }
+
+    .day-chip .dn {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+    }
+
+    .day-chip .dd {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    .day-chip.active {
+      background: var(--deep-green);
+      border-color: var(--deep-green);
+      color: rgba(247, 243, 235, 0.75);
+    }
+
+    .day-chip.active .dd { color: var(--cream); }
+
+    .day-chip:hover:not(.active) {
+      border-color: var(--sand-deep);
+      background: var(--sand);
+    }
+
+    /* ===== ITINERARY ===== */
+    #itinerary { padding-top: 2.5rem; }
+
+    .day-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: calc(var(--nav-h) + var(--day-nav-h) + 20px);
+    }
+
+    .day-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-header h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--deep-green);
+      font-weight: 600;
+    }
+
+    .day-header .day-date {
+      font-size: 0.95rem;
+      color: var(--charcoal-muted);
+      font-weight: 500;
+    }
+
+    .day-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--sand);
+      color: var(--deep-green);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--sand-deep), var(--sand), transparent);
+    }
+
+    .activity {
+      position: relative;
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 0.85rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .activity.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .activity-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--deep-green);
+      display: grid;
+      place-items: center;
+      z-index: 1;
+      margin-top: 1.15rem;
+    }
+
+    .activity-dot svg {
+      width: 12px;
+      height: 12px;
+      color: var(--deep-green);
+    }
+
+    .activity-card {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.2rem;
+      transition: box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .activity-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--sand-deep);
+    }
+
+    .activity-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .activity-time {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--terracotta);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .activity-title {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      flex: 1;
+      min-width: 12ch;
+    }
+
+    .activity-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(74, 111, 165, 0.12);
+      color: var(--muted-blue);
+    }
+
+    .activity-tag.food { background: rgba(196, 120, 90, 0.14); color: var(--terracotta); }
+    .activity-tag.stay { background: rgba(27, 67, 50, 0.1); color: var(--deep-green); }
+    .activity-tag.transport { background: rgba(74, 111, 165, 0.12); color: var(--muted-blue); }
+    .activity-tag.activity { background: rgba(45, 106, 79, 0.12); color: var(--deep-green-soft); }
+    .activity-tag.prep { background: var(--sand); color: var(--charcoal-muted); }
+
+    .activity-detail {
+      color: var(--charcoal-muted);
+      font-size: 0.94rem;
+      white-space: pre-line;
+      margin-top: 0.35rem;
+    }
+
+    .activity-note {
+      margin-top: 0.85rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 12px;
+      background: rgba(196, 120, 90, 0.08);
+      border-left: 3px solid var(--terracotta);
+      font-size: 0.88rem;
+      color: var(--charcoal);
+    }
+
+    .activity-note strong {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.25rem;
+    }
+
+    .sub-timeline {
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .sub-item {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+    }
+
+    .sub-item .st {
+      font-weight: 600;
+      color: var(--deep-green);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sub-item .sd { color: var(--charcoal-muted); }
+
+    .card-toggle {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted-blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .card-toggle svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s;
+    }
+
+    .activity-card.collapsed .activity-detail-full,
+    .activity-card.collapsed .activity-note,
+    .activity-card.collapsed .sub-timeline { display: none; }
+
+    .activity-card.collapsed .card-toggle svg { transform: rotate(-90deg); }
+
+    /* ===== ROUTE ===== */
+    .route-track {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      padding: 1.5rem 1.25rem;
+      overflow: hidden;
+    }
+
+    .route-node {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .route-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .route-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--deep-green);
+      box-shadow: 0 0 0 4px rgba(27, 67, 50, 0.12);
+      flex-shrink: 0;
+    }
+
+    .route-dot.end {
+      background: var(--terracotta);
+      box-shadow: 0 0 0 4px rgba(196, 120, 90, 0.15);
+    }
+
+    .route-line {
+      width: 2px;
+      flex: 1;
+      min-height: 28px;
+      background: var(--sand-deep);
+      margin: 6px 0;
+    }
+
+    .route-body { padding-bottom: 1.25rem; }
+
+    .route-name {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--deep-green);
+    }
+
+    .route-desc {
+      font-size: 0.88rem;
+      color: var(--charcoal-muted);
+      margin-top: 0.2rem;
+    }
+
+    .route-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0.35rem 0 0.85rem 40px;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--sand);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--charcoal-muted);
+      width: fit-content;
+    }
+
+    .maps-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    /* ===== GENERIC CARDS / GRIDS ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .info-card {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.25rem;
+      height: 100%;
+    }
+
+    .info-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--deep-green);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card p, .info-card li {
+      font-size: 0.94rem;
+      color: var(--charcoal-muted);
+    }
+
+    .info-card ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .info-card li {
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .info-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--terracotta);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.85rem;
+    }
+
+    .chip {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: var(--sand);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--deep-green);
+    }
+
+    /* ===== BUDGET ===== */
+    .budget-layout {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .budget-summary {
+      background: var(--deep-green);
+      color: var(--cream);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 1.75rem 1.5rem;
+      display: grid;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .budget-total-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.35rem;
+    }
+
+    .budget-total-value {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .budget-total-note {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .budget-chart-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .donut {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      position: relative;
+      background: conic-gradient(var(--sand) 0deg 360deg);
+    }
+
+    .donut-hole {
+      position: absolute;
+      inset: 28%;
+      border-radius: 50%;
+      background: var(--deep-green);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.3;
+      opacity: 0.9;
+    }
+
+    .budget-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      justify-content: center;
+      font-size: 0.78rem;
+    }
+
+    .budget-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .expense-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .expense-item {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+    }
+
+    .expense-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 0.55rem;
+    }
+
+    .expense-name {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--charcoal);
+    }
+
+    .expense-amount {
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--deep-green);
+      white-space: nowrap;
+    }
+
+    .expense-amount.pending {
+      color: var(--terracotta);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .expense-bar {
+      height: 6px;
+      background: var(--sand);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .expense-bar > i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--deep-green-soft);
+      width: 0;
+      transition: width 1s ease;
+    }
+
+    .expense-note {
+      margin-top: 0.55rem;
+      font-size: 0.82rem;
+      color: var(--charcoal-muted);
+    }
+
+    .expense-meta {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--muted-blue);
+      font-weight: 500;
+    }
+
+    /* ===== CONTACTS ===== */
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .contact-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .contact-name {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--deep-green);
+    }
+
+    .contact-phone {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+
+    .contact-phone:hover { color: var(--muted-blue); }
+
+    .copy-btn {
+      font-size: 0.75rem;
+      color: var(--muted-blue);
+      font-weight: 500;
+      margin-left: 0.35rem;
+    }
+
+    /* ===== CHECKLIST ===== */
+    .checklist-groups {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .check-group {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+
+    .check-group h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .check-progress {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--charcoal-muted);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .check-item:last-child { border-bottom: none; }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid var(--sand-deep);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: grid;
+      place-items: center;
+      transition: all 0.2s;
+      color: transparent;
+    }
+
+    .check-item.done .check-box {
+      background: var(--deep-green);
+      border-color: var(--deep-green);
+      color: var(--cream);
+    }
+
+    .check-item.done .check-text {
+      text-decoration: line-through;
+      color: var(--charcoal-muted);
+      opacity: 0.7;
+    }
+
+    .check-text { font-size: 0.92rem; flex: 1; }
+
+    .checklist-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .progress-pill {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--deep-green);
+      background: var(--sand);
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+    }
+
+    /* ===== SEARCH / FILTER ===== */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.6rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--warm-white);
+      font: inherit;
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--deep-green-soft);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--charcoal-muted);
+      pointer-events: none;
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .filter-chip {
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--warm-white);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--charcoal-muted);
+      transition: all 0.2s;
+    }
+
+    .filter-chip.active {
+      background: var(--deep-green);
+      border-color: var(--deep-green);
+      color: var(--cream);
+    }
+
+    .activity.hidden-filter { display: none; }
+
+    /* ===== NOTES / MEALS / EXTRA ===== */
+    .meal-card .meal-when {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.35rem;
+    }
+
+    .meal-status {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 10px;
+      background: var(--sand);
+      color: var(--charcoal-muted);
+    }
+
+    .note-block {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .note-block h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      margin-bottom: 0.4rem;
+    }
+
+    .note-block p {
+      font-size: 0.92rem;
+      color: var(--charcoal-muted);
+      white-space: pre-line;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: var(--charcoal-muted);
+      font-size: 0.88rem;
+    }
+
+    footer .foot-title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--deep-green);
+      margin-bottom: 0.35rem;
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      z-index: 200;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: calc(var(--nav-h) + var(--safe-top)) 0 auto 0;
+      background: rgba(247, 243, 235, 0.98);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem;
+      z-index: 95;
+      flex-direction: column;
+      gap: 0.25rem;
+      max-height: calc(100dvh - var(--nav-h) - var(--safe-top));
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      color: var(--charcoal);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .mobile-menu a:hover { background: var(--sand); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .overview-grid { grid-template-columns: repeat(3, 1fr); }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .nav-links { display: flex; }
+      .menu-toggle { display: none; }
+      .overview-grid { grid-template-columns: repeat(4, 1fr); }
+      .budget-layout { grid-template-columns: 340px 1fr; align-items: start; }
+      .budget-summary { grid-template-columns: 1fr; }
+      .route-track {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .desktop-route {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0;
+        overflow-x: auto;
+        padding: 1.75rem;
+      }
+      .desktop-route .route-col {
+        flex: 1;
+        min-width: 140px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .desktop-route .route-arrow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.35rem;
+        color: var(--charcoal-muted);
+        font-size: 0.72rem;
+        font-weight: 500;
+        gap: 0.25rem;
+        flex-shrink: 0;
+      }
+      .mobile-route { display: none; }
+      .checklist-groups { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 899px) {
+      .desktop-route { display: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      :root { --nav-h: 0px; --day-nav-h: 0px; }
+      html { scroll-padding-top: 0; }
+      body { background: white; color: black; font-size: 11pt; }
+      .topnav, .day-nav-wrap, .hero-cta, .toolbar, .checklist-toolbar,
+      .maps-actions, .card-toggle, .toast, .mobile-menu, .menu-toggle,
+      .icon-btn, .print-hide { display: none !important; }
+      .hero {
+        min-height: auto;
+        padding: 1.5rem 0;
+        background: #1b4332 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .hero-wave { display: none; }
+      section { padding: 1.25rem 0; break-inside: avoid; }
+      .activity { opacity: 1 !important; transform: none !important; }
+      .activity-card.collapsed .activity-detail-full,
+      .activity-card.collapsed .activity-note,
+      .activity-card.collapsed .sub-timeline { display: block !important; }
+      .stat-card, .activity-card, .info-card, .expense-item, .check-group, .note-block {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      .day-section { break-before: page; }
+      .day-section:first-of-type { break-before: auto; }
+      a[href]::after { content: none !important; }
+      .donut { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topnav">
+    <div class="container topnav-inner">
+      <a href="#top" class="brand" aria-label="Về đầu trang">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 7-8"/><path d="M14 7h6v6"/></svg>
+        </span>
+        <span>Nhà Hìn · Cát Bà</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#overview">Tổng quan</a>
+        <a href="#itinerary">Lịch trình</a>
+        <a href="#route">Lộ trình</a>
+        <a href="#stay-food">Ở &amp; Ăn</a>
+        <a href="#budget">Chi phí</a>
+        <a href="#checklist">Checklist</a>
+        <a href="#contacts">Liên hệ</a>
+      </div>
+      <div class="topnav-actions">
+        <button class="icon-btn print-hide" onclick="window.print()" title="In / Lưu PDF" aria-label="In">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+        </button>
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu"></div>
+
+  <div class="boot-fallback" id="bootFallback">
+    Đang tải kế hoạch du lịch…<br />
+    Nếu trang không hiện, hãy mở bằng trình duyệt (Safari/Chrome), không mở bằng app xem file.
+  </div>
+
+  <header class="hero" id="top">
+    <div class="hero-content" id="heroContent"></div>
+    <svg class="hero-wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="currentColor" d="M0,40 C240,70 480,10 720,30 C960,50 1200,70 1440,35 L1440,72 L0,72 Z"/>
+    </svg>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Trip Overview</div>
+          <h2>Tổng quan chuyến đi</h2>
+          <p>Những thông tin then chốt để nắm nhanh toàn bộ hành trình Cát Bà.</p>
+        </div>
+        <div class="overview-grid" id="overviewGrid"></div>
+      </div>
+    </section>
+
+    <div class="day-nav-wrap print-hide" id="dayNavWrap">
+      <div class="container">
+        <div class="day-nav" id="dayNav" role="navigation" aria-label="Điều hướng theo ngày"></div>
+      </div>
+    </div>
+
+    <section id="itinerary">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Itinerary</div>
+          <h2>Lịch trình chi tiết</h2>
+          <p>Timeline theo từng ngày — từ chuẩn bị hành lý đến lúc về Hà Nội.</p>
+        </div>
+        <div class="toolbar print-hide reveal">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+            <input type="search" id="searchInput" placeholder="Tìm hoạt động, địa điểm, ghi chú..." autocomplete="off" />
+          </div>
+          <div class="filter-chips" id="filterChips"></div>
+        </div>
+        <div id="itineraryRoot"></div>
+      </div>
+    </section>
+
+    <section id="route">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Trip Route</div>
+          <h2>Lộ trình di chuyển</h2>
+          <p>Hành trình từ Hà Nội đến Cát Bà và trở về — theo đúng lịch trình.</p>
+        </div>
+        <div id="routeRoot" class="reveal"></div>
+      </div>
+    </section>
+
+    <section id="destinations">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Destinations</div>
+          <h2>Điểm đến &amp; trải nghiệm</h2>
+          <p>Các địa điểm sẽ đi qua trong chuyến đi.</p>
+        </div>
+        <div class="cards-grid" id="destinationsRoot"></div>
+      </div>
+    </section>
+
+    <section id="stay-food">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Stay &amp; Food</div>
+          <h2>Nơi ở &amp; ẩm thực</h2>
+          <p>Khách sạn, nhà hàng và các bữa ăn trong lịch trình.</p>
+        </div>
+        <div class="cards-grid" id="stayFoodRoot"></div>
+      </div>
+    </section>
+
+    <section id="transport">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Transport</div>
+          <h2>Di chuyển &amp; vé</h2>
+          <p>Phương tiện và các hạng mục vé đã dự trù.</p>
+        </div>
+        <div class="cards-grid" id="transportRoot"></div>
+      </div>
+    </section>
+
+    <section id="budget">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Budget</div>
+          <h2>Chi phí dự trù</h2>
+          <p>Tổng hợp theo từng khoản — số liệu lấy trực tiếp từ bảng dự trù.</p>
+        </div>
+        <div class="budget-layout reveal" id="budgetRoot"></div>
+      </div>
+    </section>
+
+    <section id="bookings">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Bookings</div>
+          <h2>Booking &amp; đặt chỗ</h2>
+          <p>Thông tin đặt tour / nhà xe đã ghi nhận.</p>
+        </div>
+        <div class="cards-grid" id="bookingsRoot"></div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Checklist</div>
+          <h2>Chuẩn bị hành lý</h2>
+          <p>Danh sách đồ cần mang theo — đánh dấu khi đã chuẩn bị xong.</p>
+        </div>
+        <div class="checklist-toolbar print-hide reveal">
+          <div class="progress-pill" id="checkProgress">0 / 0 hoàn thành</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" id="resetChecklist">Xóa đánh dấu</button>
+          </div>
+        </div>
+        <div class="checklist-groups reveal" id="checklistRoot"></div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Contacts</div>
+          <h2>Liên hệ quan trọng</h2>
+          <p>Số điện thoại nhà xe và đơn vị tour.</p>
+        </div>
+        <div class="cards-grid" id="contactsRoot"></div>
+      </div>
+    </section>
+
+    <section id="notes">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Notes</div>
+          <h2>Ghi chú quan trọng</h2>
+          <p>Toàn bộ lưu ý theo từng hoạt động trong chuyến đi.</p>
+        </div>
+        <div id="notesRoot"></div>
+      </div>
+    </section>
+
+    <section id="details">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Trip Details</div>
+          <h2>Thông tin bổ sung</h2>
+          <p>Các thông tin khác từ kế hoạch gốc.</p>
+        </div>
+        <div id="detailsRoot"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot-title">Cát Bà · Nhà Hìn</div>
+      <p>Travel Planner · 15–16/8/2026 · 7 người</p>
+      <p style="margin-top:0.5rem;opacity:0.7">Dữ liệu nguồn: Kế hoạch du lịch Cát Bà.xlsx</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+  /* =========================================================
+     DATA — nguồn: Kế hoạch du lịch Cát Bà.xlsx
+     Sheets: Kế hoạch | Chi phí dự trù | Menu nhà hàng
+     ========================================================= */
+  const tripData = {
+    overview: {
+      title: "Kế hoạch du lịch Cát Bà - Nhà Hìn",
+      brand: "Nhà Hìn",
+      destination: "Cát Bà",
+      destinationsLabel: "HÀ NỘI · CÁT BÀ · VỊNH LAN HẠ",
+      dateLabel: "15 — 16 AUGUST 2026",
+      dateRangeRaw: "15-16/8/2026",
+      startDate: "2026-08-15",
+      endDate: "2026-08-16",
+      prepDate: "2026-08-14",
+      members: 7,
+      durationDays: 2,
+      nights: 1,
+      departureAddress: "Số nhà 20, đường Trục Giữa, thôn Trung Lập, Phượng Dực, Hà Nội",
+      summaryLine: "Thời gian: 15-16/8/2026\nThành viên: 7 người"
+    },
+
+    days: [
+      {
+        id: "day-0",
+        dayNumber: 0,
+        label: "DAY 00",
+        shortLabel: "Chuẩn bị",
+        date: "2026-08-14",
+        dateDisplay: "14 August 2026",
+        dateVi: "Thứ Sáu, 14/8/2026",
+        badge: "Chuẩn bị",
+        activities: [
+          {
+            id: "a-prep",
+            time: "21h00",
+            title: "Chuẩn bị hành lý",
+            category: "prep",
+            detail: "Chuẩn bị đầy đủ đồ dùng cá nhân và sắp xếp hành lý từ tối hôm trước để sáng hôm sau xuất phát đúng giờ.\n\nĐồ dùng cá nhân:\n• Bàn chải, kem đánh răng, sữa tắm, dầu gội, dầu xả, khăn mặt.\n• Kem chống nắng, mỹ phẩm, đồ trang điểm, sữa rửa mặt, tẩy trang, dưỡng da.\n• Thuốc cá nhân: đau đầu, đau bụng, say xe, đi ngoài, băng cá nhân...\n\nQuần áo:\n• 01 bộ mặc khi xuất phát.\n• 02 bộ đồ bơi.\n• 01 bộ đẹp để chụp ảnh trên du thuyền.\n• 01 bộ chụp bình minh hoặc hoàng hôn (nếu có nhu cầu).\n• 01 bộ mặc đi chơi buổi tối.\n• 01 bộ mặc ngày hôm sau.\n• 01 bộ mặc ngủ.\n\nPhụ kiện:\n• Kính bơi, mũ bơi.\n• Dép đi biển, kính râm, mũ chống nắng.\n• Túi chống nước cho điện thoại (nếu có).\n• Túi nilon đựng quần áo ướt.\n\nĐồ ăn nhẹ:\n• Hoa quả, bánh, nước uống, rượu (nếu cần).",
+            note: "Ngủ sớm để đảm bảo sức khỏe. Sạc đầy điện thoại, pin dự phòng, tai nghe, máy ảnh và kiểm tra giấy tờ cá nhân.",
+            collapsible: true
+          }
+        ]
+      },
+      {
+        id: "day-1",
+        dayNumber: 1,
+        label: "DAY 01",
+        shortLabel: "Ngày 1",
+        date: "2026-08-15",
+        dateDisplay: "15 August 2026",
+        dateVi: "Thứ Bảy, 15/8/2026",
+        badge: "Xuất phát · Tour",
+        activities: [
+          {
+            id: "a1",
+            time: "05h00",
+            title: "Thức dậy, ăn sáng",
+            category: "food",
+            detail: "Dậy vệ sinh cá nhân, ăn sáng nhẹ",
+            note: null
+          },
+          {
+            id: "a2",
+            time: "05h30",
+            title: "Xuất phát",
+            category: "transport",
+            detail: "Khởi hành từ Số nhà 20, đường Trục Giữa, thôn Trung Lập, Phượng Dực, Hà Nội.",
+            note: "Kiểm tra lại toàn bộ hành lý trước khi xe lăn bánh, tránh bỏ quên đồ.",
+            mapsQuery: "Số nhà 20, đường Trục Giữa, thôn Trung Lập, Phượng Dực, Hà Nội"
+          },
+          {
+            id: "a3",
+            time: "09h00",
+            title: "Đi cáp treo",
+            category: "transport",
+            detail: "Khoảng 8h30 xe đến ga cáp treo. Đoàn di chuyển vào ga cáp treo Cát Hải, check vé và đi cáp treo đến ga Phù Long chuyến sớm nhất là 9h00",
+            note: "Mang đồ cần thiết lên cáp treo (điện thoại), còn lại để ở xe",
+            mapsQuery: "Ga cáp treo Cát Hải"
+          },
+          {
+            id: "a4",
+            time: "09h30",
+            title: "Di chuyển vào trung tâm",
+            category: "transport",
+            detail: "Đáp ga Phù Long, nhà xe đón ở ga Phù Long, di chuyển vào trung tâm Cát Bà",
+            note: null,
+            mapsQuery: "Ga cáp treo Phù Long Cát Bà"
+          },
+          {
+            id: "a5",
+            time: "10h00",
+            title: "Check in",
+            category: "stay",
+            detail: "Xe di chuyển đến KS, đoàn check in và nhận phòng, nghỉ ngơi",
+            note: "Trước khi xuống xe kiểm tra thật kĩ đồ đạc trên xe để mang xuống hết"
+          },
+          {
+            id: "a6",
+            time: "11h00",
+            title: "Ăn trưa",
+            category: "food",
+            detail: "Ăn tại nhà hàng của KS",
+            note: null,
+            relatedMeal: "lunch-15"
+          },
+          {
+            id: "a7",
+            time: "12h30",
+            title: "Nghỉ trưa",
+            category: "prep",
+            detail: "Nghỉ ngơi, lấy lại sức trước khi đi tour.",
+            note: "Nên đặt báo thức để chuẩn bị đúng giờ."
+          },
+          {
+            id: "a8",
+            time: "13h45",
+            title: "Chuẩn bị đi Vịnh Lan Hạ",
+            category: "prep",
+            detail: "Thay đồ, trang điểm, bôi kem chống nắng.\n\nMang theo:\n• Đồ bơi, khăn tắm, sữa tắm, dầu gội, dầu xả\n• Quần áo đẹp chụp ảnh du thuyền\n• Quần áo thay sau khi tắm.\n• Kính bơi, mũ bơi.\n• Túi chống nước cho điện thoại.\n• Túi đựng quần áo ướt.\n\nDi chuyển xuống sảnh khách sạn để lên xe của đơn vị tổ chức tour.",
+            note: "Có mặt trước giờ đón khoảng 10 phút.",
+            collapsible: true
+          },
+          {
+            id: "a9",
+            time: "14h45-18h30",
+            title: "Tour Vịnh Lan Hạ",
+            category: "activity",
+            detail: "Tour Vịnh Lan Hạ theo lịch chi tiết bên dưới. Xe đưa đoàn trở về khách sạn.",
+            note: "Phân chia người tắm trước/sau để tiết kiệm thời gian khi về khách sạn. Bảo quản điện thoại và đồ điện tử trong túi chống nước.",
+            mapsQuery: "Vịnh Lan Hạ Cát Bà",
+            subEvents: [
+              { time: "14:15–14:45", detail: "Đón khách, ra bến Bèo, làm thủ tục lên tàu." },
+              { time: "14:45", detail: "Tham quan làng chài nổi Cái Bèo." },
+              { time: "15:00–16:30", detail: "Tham quan Hòn Rùa – biểu tượng Vịnh Lan Hạ." },
+              { time: "16:30–17:40", detail: "Chèo kayak, tắm biển, nhảy tàu (tự nguyện)." },
+              { time: "17:40–18:30", detail: "Thưởng thức tiệc trà chiều, ngắm hoàng hôn trên vịnh." }
+            ]
+          },
+          {
+            id: "a10",
+            time: "18h30-19h00",
+            title: "Tắm rửa",
+            category: "prep",
+            detail: "Thay quần áo, nghỉ ngơi.",
+            note: "Chuẩn bị nhanh để kịp ăn tối."
+          },
+          {
+            id: "a11",
+            time: "19h00-20h00",
+            title: "Ăn tối",
+            category: "food",
+            detail: "Chọn trước quán (ưu tiên gần quảng trường)",
+            note: null,
+            relatedMeal: "dinner-15"
+          },
+          {
+            id: "a12",
+            time: "20h00-22h00",
+            title: "Dạo chơi buổi tối",
+            category: "activity",
+            detail: "Di chuyển ra trung tâm thị trấn, dạo biển, ăn kem, uống cà phê và xem pháo hoa (dự kiến 20:30 và 21:45, mỗi đợt khoảng 10–15 phút).",
+            note: null,
+            mapsQuery: "Quảng trường Cát Bà"
+          }
+        ]
+      },
+      {
+        id: "day-2",
+        dayNumber: 2,
+        label: "DAY 02",
+        shortLabel: "Ngày 2",
+        date: "2026-08-16",
+        dateDisplay: "16 August 2026",
+        dateVi: "Chủ Nhật, 16/8/2026",
+        badge: "Khám phá · Về Hà Nội",
+        activities: [
+          {
+            id: "b1",
+            time: "05h00-7h00",
+            title: "Tắm biển sáng",
+            category: "activity",
+            detail: "Dậy sớm ngắm bình minh, chụp ảnh tại bãi Cát Cò, tắm biển và thư giãn. (Xác định trước bãi Cát Cò sẽ tắm)",
+            note: "Nên tranh thủ chụp ảnh trước 6h30 để ánh sáng đẹp và bãi biển còn vắng.",
+            mapsQuery: "Bãi Cát Cò Cát Bà"
+          },
+          {
+            id: "b2",
+            time: "07h00-07h30",
+            title: "Tắm rửa",
+            category: "prep",
+            detail: "Về khách sạn vệ sinh cá nhân, thay quần áo.",
+            note: "Kiểm tra đồ đạc trước khi xuống ăn sáng."
+          },
+          {
+            id: "b3",
+            time: "07h30-08h30",
+            title: "Ăn sáng",
+            category: "food",
+            detail: "Ăn sáng tại khách sạn hoặc quán địa phương (chọn trước quán)",
+            note: null
+          },
+          {
+            id: "b4",
+            time: "8h30-10h30",
+            title: "Tham quan Cát Bà",
+            category: "activity",
+            detail: "Dạo các bãi Cát Cò, đường ven biển hoặc Pháo đài Thần Công (nếu thời gian cho phép), sau đó ghé chợ Cát Bà mua đặc sản.",
+            note: "Không mua quá nhiều hải sản tươi nếu phải di chuyển xa.",
+            mapsQuery: "Pháo đài Thần Công Cát Bà"
+          },
+          {
+            id: "b5",
+            time: "10h30-12h00",
+            title: "Ăn trưa",
+            category: "food",
+            detail: "Ăn trưa, nghỉ ngơi nhẹ (chọn trước quán)",
+            note: null,
+            relatedMeal: "lunch-16"
+          },
+          {
+            id: "b6",
+            time: "12h00-13h45",
+            title: "Nghỉ trưa",
+            category: "prep",
+            detail: "Thu dọn hành lý, kiểm tra phòng.",
+            note: "Không để quên đồ trong tủ, nhà vệ sinh hoặc ổ cắm điện."
+          },
+          {
+            id: "b7",
+            time: "13h45-14h00",
+            title: "Check-out",
+            category: "stay",
+            detail: "Trả phòng khách sạn.",
+            note: "Kiểm tra hóa đơn nếu có phát sinh."
+          },
+          {
+            id: "b8",
+            time: "14h00-14h30",
+            title: "Di chuyển ra ga cáp treo",
+            category: "transport",
+            detail: "Xe đưa đoàn ra ga Phù Long.",
+            note: "Có mặt đúng giờ để không lỡ chuyến cáp.",
+            mapsQuery: "Ga cáp treo Phù Long Cát Bà"
+          },
+          {
+            id: "b9",
+            time: "14h30-15h00",
+            title: "Đi cáp treo",
+            category: "transport",
+            detail: "Phù Long → Cát Hải.",
+            note: "Chuẩn bị nhận lại xe."
+          },
+          {
+            id: "b10",
+            time: "15h00-18h00",
+            title: "Về Hà Nội",
+            category: "transport",
+            detail: "Xe đón ở Cát Hải về thẳng nhà",
+            note: "Nghỉ dọc đường nếu cần, kết thúc chuyến đi an toàn và nhiều kỷ niệm đẹp.",
+            mapsQuery: "Ga cáp treo Cát Hải"
+          }
+        ]
+      }
+    ],
+
+    destinations: [
+      {
+        name: "Hà Nội (điểm xuất phát)",
+        detail: "Số nhà 20, đường Trục Giữa, thôn Trung Lập, Phượng Dực, Hà Nội.",
+        mapsQuery: "Số nhà 20, đường Trục Giữa, thôn Trung Lập, Phượng Dực, Hà Nội"
+      },
+      {
+        name: "Ga cáp treo Cát Hải",
+        detail: "Xe đến khoảng 8h30. Check vé và đi cáp treo chuyến sớm nhất 9h00 đến ga Phù Long.",
+        mapsQuery: "Ga cáp treo Cát Hải"
+      },
+      {
+        name: "Ga Phù Long",
+        detail: "Đáp cáp treo, nhà xe đón để vào trung tâm Cát Bà. Điểm trở ra khi về.",
+        mapsQuery: "Ga cáp treo Phù Long Cát Bà"
+      },
+      {
+        name: "Trung tâm Cát Bà",
+        detail: "Check-in khách sạn, ăn uống, dạo biển buổi tối, xem pháo hoa.",
+        mapsQuery: "Thị trấn Cát Bà"
+      },
+      {
+        name: "Vịnh Lan Hạ",
+        detail: "Tour chiều 15/8: làng chài Cái Bèo, Hòn Rùa, kayak, tắm biển, trà chiều ngắm hoàng hôn.",
+        mapsQuery: "Vịnh Lan Hạ Cát Bà"
+      },
+      {
+        name: "Bến Bèo",
+        detail: "Làm thủ tục lên tàu trong tour Vịnh Lan Hạ.",
+        mapsQuery: "Bến Bèo Cát Bà"
+      },
+      {
+        name: "Làng chài nổi Cái Bèo",
+        detail: "Điểm tham quan trong tour Vịnh Lan Hạ (14:45).",
+        mapsQuery: "Làng chài Cái Bèo Cát Bà"
+      },
+      {
+        name: "Hòn Rùa",
+        detail: "Biểu tượng Vịnh Lan Hạ — tham quan 15:00–16:30.",
+        mapsQuery: "Hòn Rùa Vịnh Lan Hạ"
+      },
+      {
+        name: "Bãi Cát Cò",
+        detail: "Tắm biển sáng 16/8, ngắm bình minh, chụp ảnh. Xác định trước bãi sẽ tắm.",
+        mapsQuery: "Bãi Cát Cò Cát Bà"
+      },
+      {
+        name: "Pháo đài Thần Công",
+        detail: "Tham quan nếu thời gian cho phép (sáng 16/8).",
+        mapsQuery: "Pháo đài Thần Công Cát Bà"
+      },
+      {
+        name: "Chợ Cát Bà",
+        detail: "Mua đặc sản trước khi về. Không mua quá nhiều hải sản tươi nếu phải di chuyển xa.",
+        mapsQuery: "Chợ Cát Bà"
+      }
+    ],
+
+    accommodations: [
+      {
+        name: "Khách sạn tại Cát Bà (KS)",
+        detail: "Check-in ~10h00 ngày 15/8 · Check-out 13h45–14h00 ngày 16/8. Ăn trưa 15/8 tại nhà hàng của KS.",
+        restaurant: "Nhà hàng Phú Thành (Nhà hàng của KS)",
+        nights: "1 đêm (1n1đ)",
+        note: "Chi phí phòng trong bảng dự trù chưa có số tiền cụ thể."
+      }
+    ],
+
+    meals: [
+      {
+        id: "lunch-15",
+        when: "Bữa trưa 15/8",
+        place: "Nhà hàng Phú Thành (Nhà hàng của KS) - Menu 1",
+        note: "Theo sheet Menu nhà hàng — đã ghi nhận nhà hàng & menu.",
+        status: "Đã chọn nhà hàng"
+      },
+      {
+        id: "dinner-15",
+        when: "Bữa tối 15/8",
+        place: null,
+        note: "Trong lịch trình: chọn trước quán (ưu tiên gần quảng trường). Sheet Menu có cột này nhưng chưa điền chi tiết.",
+        status: "Chưa chọn quán cụ thể"
+      },
+      {
+        id: "lunch-16",
+        when: "Bữa trưa 15/8",
+        place: null,
+        note: "Cột thứ 3 trong sheet Menu nhà hàng (nguyên văn tiêu đề Excel: «Bữa trưa 15/8»). Trong lịch trình ngày 16/8: ăn trưa, nghỉ ngơi nhẹ (chọn trước quán).",
+        status: "Chưa điền chi tiết trong Excel",
+        excelNote: true
+      },
+      {
+        id: "breakfast-general",
+        when: "Ăn sáng",
+        place: null,
+        note: "15/8: ăn sáng nhẹ trước khi xuất phát. 16/8: ăn sáng tại khách sạn hoặc quán địa phương (chọn trước quán). Dự trù: 60k/người.",
+        status: "Theo lịch trình"
+      }
+    ],
+
+    transport: [
+      {
+        name: "Xe di chuyển khứ hồi",
+        detail: "Từ nhà đến tận KS Cát Bà và chiều về từ Cát Hải về thẳng nhà.",
+        provider: "Nhà xe Sơn Hà",
+        phone: "0963999295",
+        phoneDisplay: "096 3999295",
+        cost: 3000000
+      },
+      {
+        name: "Vé cáp treo",
+        detail: "67k/người/lượt · 7 người · 2 lượt (đi + về). Cát Hải ↔ Phù Long.",
+        cost: 938000,
+        formula: "67.000 × 7 × 2"
+      },
+      {
+        name: "Vé du thuyền Vịnh Lan Hạ",
+        detail: "380k/người · 7 người. Đã cọc 500k, hoàn thành tour thanh toán nốt.",
+        cost: 2660000,
+        formula: "380.000 × 7",
+        contact: { name: "em Thảo Tiên", phone: "0368236422", phoneDisplay: "0368 236 422" },
+        deposit: 500000
+      },
+      {
+        name: "Di chuyển nội đảo",
+        detail: "Di chuyển giữa các điểm chơi hoặc đi bơi (book taxi sẽ rẻ hơn xe điện).",
+        cost: 500000
+      }
+    ],
+
+    expenses: [
+      {
+        stt: 1,
+        name: "Xe di chuyển khứ hồi từ nhà đến tận KS Cát Bà",
+        amount: 3000000,
+        note: "Nhà xe Sơn Hà (096 3999295)",
+        category: "transport"
+      },
+      {
+        stt: 2,
+        name: "Vé cáp treo 67k/người/lượt",
+        amount: 938000,
+        note: null,
+        formula: "67000×7×2",
+        category: "transport"
+      },
+      {
+        stt: 3,
+        name: "Vé du thuyền Vịnh Lan Hạ 380k/người",
+        amount: 2660000,
+        note: "Đã cọc 500k, hoàn thành tour thanh toán nốt (em Thảo Tiên 0368 236 422)",
+        formula: "380000×7",
+        category: "activity"
+      },
+      {
+        stt: 4,
+        name: "Phòng khách sạn 1n1đ",
+        amount: null,
+        note: "Chưa có số liệu trong Excel",
+        category: "stay"
+      },
+      {
+        stt: 5,
+        name: "Ăn sáng 60k/người",
+        amount: 420000,
+        note: null,
+        formula: "60000×7",
+        category: "food"
+      },
+      {
+        stt: 6,
+        name: "Ăn trưa 2 bữa, khoảng 1tr8/bữa",
+        amount: 3600000,
+        note: null,
+        formula: "1800000×2",
+        category: "food"
+      },
+      {
+        stt: 7,
+        name: "Ăn tối 1 bữa",
+        amount: 2100000,
+        note: null,
+        category: "food"
+      },
+      {
+        stt: 8,
+        name: "Di chuyển giữa các điểm chơi hoặc đi bơi (book taxi sẽ rẻ hơn xe điện)",
+        amount: 500000,
+        note: null,
+        category: "transport"
+      },
+      {
+        stt: 9,
+        name: "Tiền chơi tối phát sinh (nếu có)",
+        amount: 500000,
+        note: null,
+        category: "activity"
+      }
+    ],
+    expenseTotal: 13718000,
+    expenseTotalNote: "Tổng = SUM(C2:C10) trong Excel. Khoản «Phòng khách sạn 1n1đ» chưa có số tiền nên không nằm trong tổng.",
+
+    bookings: [
+      {
+        title: "Nhà xe Sơn Hà",
+        detail: "Xe khứ hồi từ nhà đến tận KS Cát Bà.",
+        amount: 3000000,
+        phone: "0963999295",
+        phoneDisplay: "096 3999295",
+        status: "Đã ghi nhận nhà xe"
+      },
+      {
+        title: "Tour du thuyền Vịnh Lan Hạ",
+        detail: "380k/người × 7 người = 2.660.000đ. Đã cọc 500k, hoàn thành tour thanh toán nốt.",
+        amount: 2660000,
+        deposit: 500000,
+        contact: "em Thảo Tiên",
+        phone: "0368236422",
+        phoneDisplay: "0368 236 422",
+        status: "Đã cọc 500.000đ"
+      },
+      {
+        title: "Vé cáp treo",
+        detail: "67k/người/lượt × 7 người × 2 lượt.",
+        amount: 938000,
+        status: "Dự trù"
+      },
+      {
+        title: "Phòng khách sạn 1n1đ",
+        detail: "Có trong bảng dự trù nhưng chưa điền chi phí.",
+        amount: null,
+        status: "Chưa có số liệu"
+      }
+    ],
+
+    contacts: [
+      {
+        role: "Nhà xe",
+        name: "Sơn Hà",
+        phone: "0963999295",
+        phoneDisplay: "096 3999295",
+        note: "Xe di chuyển khứ hồi từ nhà đến tận KS Cát Bà"
+      },
+      {
+        role: "Tour Vịnh Lan Hạ",
+        name: "em Thảo Tiên",
+        phone: "0368236422",
+        phoneDisplay: "0368 236 422",
+        note: "Đã cọc 500k, hoàn thành tour thanh toán nốt"
+      }
+    ],
+
+    checklist: [
+      {
+        group: "Đồ dùng cá nhân",
+        items: [
+          "Bàn chải",
+          "Kem đánh răng",
+          "Sữa tắm",
+          "Dầu gội",
+          "Dầu xả",
+          "Khăn mặt",
+          "Kem chống nắng",
+          "Mỹ phẩm / đồ trang điểm",
+          "Sữa rửa mặt",
+          "Tẩy trang",
+          "Dưỡng da",
+          "Thuốc cá nhân: đau đầu, đau bụng, say xe, đi ngoài, băng cá nhân..."
+        ]
+      },
+      {
+        group: "Quần áo",
+        items: [
+          "01 bộ mặc khi xuất phát",
+          "02 bộ đồ bơi",
+          "01 bộ đẹp để chụp ảnh trên du thuyền",
+          "01 bộ chụp bình minh hoặc hoàng hôn (nếu có nhu cầu)",
+          "01 bộ mặc đi chơi buổi tối",
+          "01 bộ mặc ngày hôm sau",
+          "01 bộ mặc ngủ"
+        ]
+      },
+      {
+        group: "Phụ kiện",
+        items: [
+          "Kính bơi, mũ bơi",
+          "Dép đi biển",
+          "Kính râm",
+          "Mũ chống nắng",
+          "Túi chống nước cho điện thoại (nếu có)",
+          "Túi nilon đựng quần áo ướt"
+        ]
+      },
+      {
+        group: "Đồ ăn nhẹ",
+        items: [
+          "Hoa quả",
+          "Bánh",
+          "Nước uống",
+          "Rượu (nếu cần)"
+        ]
+      },
+      {
+        group: "Trước khi ngủ / xuất phát",
+        items: [
+          "Ngủ sớm để đảm bảo sức khỏe",
+          "Sạc đầy điện thoại",
+          "Pin dự phòng",
+          "Tai nghe",
+          "Máy ảnh",
+          "Kiểm tra giấy tờ cá nhân",
+          "Kiểm tra lại toàn bộ hành lý trước khi xe lăn bánh"
+        ]
+      },
+      {
+        group: "Mang theo khi đi tour Vịnh Lan Hạ",
+        items: [
+          "Đồ bơi, khăn tắm, sữa tắm, dầu gội, dầu xả",
+          "Quần áo đẹp chụp ảnh du thuyền",
+          "Quần áo thay sau khi tắm",
+          "Kính bơi, mũ bơi",
+          "Túi chống nước cho điện thoại",
+          "Túi đựng quần áo ướt",
+          "Có mặt trước giờ đón khoảng 10 phút"
+        ]
+      }
+    ],
+
+    route: [
+      { name: "Hà Nội", desc: "Xuất phát 05h30 · Phượng Dực", mode: null },
+      { name: "Ga Cát Hải", desc: "Đến ~8h30 · Lên cáp treo 9h00", mode: "Xe nhà xe Sơn Hà" },
+      { name: "Ga Phù Long", desc: "Đáp cáp treo · Xe đón vào trung tâm", mode: "Cáp treo" },
+      { name: "KS Cát Bà", desc: "Check-in 10h00 · Base camp", mode: "Xe" },
+      { name: "Vịnh Lan Hạ", desc: "Tour 14h45–18h30", mode: "Xe tour + Du thuyền" },
+      { name: "Bãi Cát Cò", desc: "Tắm biển sáng 16/8", mode: "Nội đảo" },
+      { name: "Ga Phù Long", desc: "Ra cáp ~14h00–14h30", mode: "Xe" },
+      { name: "Ga Cát Hải", desc: "Xuống cáp · Nhận xe", mode: "Cáp treo" },
+      { name: "Hà Nội", desc: "Về nhà 15h00–18h00", mode: "Xe nhà xe Sơn Hà", end: true }
+    ],
+
+    additionalInfo: [
+      {
+        title: "Nguồn dữ liệu",
+        body: "File Excel gồm 3 sheet:\n• Kế hoạch — lịch trình theo ngày/giờ\n• Chi phí dự trù — 9 khoản + tổng\n• Menu nhà hàng — tiêu đề các bữa và Nhà hàng Phú Thành (Menu 1) cho bữa trưa 15/8"
+      },
+      {
+        title: "Pháo hoa buổi tối 15/8",
+        body: "Dự kiến 20:30 và 21:45, mỗi đợt khoảng 10–15 phút — xem trong lúc dạo chơi trung tâm thị trấn."
+      },
+      {
+        title: "Menu nhà hàng (sheet gốc)",
+        body: "Cột 1: Bữa trưa 15/8 → Nhà hàng Phú Thành (Nhà hàng của KS) - Menu 1\nCột 2: Bữa tối 15/8 → (chưa điền)\nCột 3: Bữa trưa 15/8 → (chưa điền — giữ nguyên tiêu đề như trong Excel)"
+      }
+    ]
+  };
+
+  /* =========================================================
+     CONFIG
+     ========================================================= */
+  const CONFIG = {
+    categoryLabels: {
+      prep: "Chuẩn bị",
+      food: "Ẩm thực",
+      transport: "Di chuyển",
+      stay: "Lưu trú",
+      activity: "Hoạt động"
+    },
+    categoryFilters: [
+      { id: "all", label: "Tất cả" },
+      { id: "activity", label: "Hoạt động" },
+      { id: "food", label: "Ăn uống" },
+      { id: "transport", label: "Di chuyển" },
+      { id: "stay", label: "Lưu trú" },
+      { id: "prep", label: "Chuẩn bị" }
+    ],
+    chartColors: [
+      "#2d6a4f",
+      "#4a6fa5",
+      "#c4785a",
+      "#d4c4ae",
+      "#1b4332",
+      "#7a9cc6",
+      "#e8a87c",
+      "#5a8f7b",
+      "#8b7355"
+    ],
+    storageKey: "catba-checklist-v1"
+  };
+
+  /* =========================================================
+     UTILITIES
+     ========================================================= */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+  function formatVND(n) {
+    if (n == null || Number.isNaN(n)) return null;
+    return new Intl.NumberFormat("vi-VN").format(n) + "đ";
+  }
+
+  function escapeHtml(str) {
+    return String(str ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function mapsUrl(query) {
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query);
+  }
+
+  function showToast(msg) {
+    const el = $("#toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => el.classList.remove("show"), 2200);
+  }
+
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("Đã sao chép: " + text);
+    } catch {
+      showToast("Không sao chép được");
+    }
+  }
+
+  function iconForCategory(cat) {
+    const icons = {
+      prep: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>',
+      food: '<path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/>',
+      transport: '<path d="M5 17h14v-5H5v5z"/><path d="M5 12V7l2-3h10l2 3v5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>',
+      stay: '<path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-6h6v6"/>',
+      activity: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'
+    };
+    return icons[cat] || icons.activity;
+  }
+
+  /* =========================================================
+     RENDER
+     ========================================================= */
+  function renderHero() {
+    const o = tripData.overview;
+    $("#heroContent").innerHTML = `
+      <div class="eyebrow">My Trip</div>
+      <h1>${escapeHtml(o.destination)}</h1>
+      <div class="hero-dest">${escapeHtml(o.destinationsLabel)}</div>
+      <div class="hero-meta">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          ${escapeHtml(o.dateLabel)}
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          ${o.durationDays} DAYS · ${o.nights} NIGHT${o.nights > 1 ? "S" : ""}
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          ${o.members} người · ${escapeHtml(o.brand)}
+        </span>
+      </div>
+      <p style="max-width:36rem;margin-bottom:1.5rem;opacity:0.88;font-size:1.02rem">${escapeHtml(o.title)}</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#itinerary">Xem lịch trình</a>
+        <a class="btn btn-ghost" href="#budget">Chi phí dự trù</a>
+      </div>
+    `;
+  }
+
+  function renderOverview() {
+    const o = tripData.overview;
+    const knownExpenses = tripData.expenses.filter(e => e.amount != null);
+    const cards = [
+      { label: "Dates", value: o.dateRangeRaw, hint: "Kèm đêm chuẩn bị 14/8" },
+      { label: "Duration", value: `${o.durationDays} ngày · ${o.nights} đêm`, hint: "15–16/8/2026" },
+      { label: "People", value: `${o.members} người`, hint: "Thành viên đoàn" },
+      { label: "Transport", value: "Xe + Cáp treo", hint: "Nhà xe Sơn Hà" },
+      { label: "Budget", value: formatVND(tripData.expenseTotal), hint: "Chưa gồm tiền phòng KS" },
+      { label: "Destinations", value: String(tripData.destinations.length), hint: "Điểm trong hành trình" },
+      { label: "Activities", value: String(tripData.days.reduce((n, d) => n + d.activities.length, 0)), hint: "Mốc trong timeline" },
+      { label: "Stay", value: "1n1đ · KS Cát Bà", hint: "Nhà hàng Phú Thành" }
+    ];
+    $("#overviewGrid").innerHTML = cards.map(c => `
+      <article class="stat-card reveal">
+        <div class="label">${escapeHtml(c.label)}</div>
+        <div class="value">${escapeHtml(c.value)}</div>
+        <div class="hint">${escapeHtml(c.hint)}</div>
+      </article>
+    `).join("");
+  }
+
+  function renderDayNav() {
+    $("#dayNav").innerHTML = tripData.days.map((d, i) => `
+      <button class="day-chip${i === 1 ? " active" : ""}" data-day="${d.id}" type="button">
+        <span class="dn">${escapeHtml(d.label)}</span>
+        <span class="dd">${escapeHtml(d.shortLabel)}</span>
+      </button>
+    `).join("");
+  }
+
+  function renderActivity(a) {
+    const tag = CONFIG.categoryLabels[a.category] || a.category;
+    const mapsBtn = a.mapsQuery
+      ? `<a class="btn btn-ghost btn-sm" href="${mapsUrl(a.mapsQuery)}" target="_blank" rel="noopener">Mở Maps</a>`
+      : "";
+    const sub = a.subEvents?.length
+      ? `<div class="sub-timeline">${a.subEvents.map(s => `
+          <div class="sub-item"><span class="st">${escapeHtml(s.time)}</span><span class="sd">${escapeHtml(s.detail)}</span></div>
+        `).join("")}</div>`
+      : "";
+    const note = a.note
+      ? `<div class="activity-note"><strong>Lưu ý</strong>${escapeHtml(a.note)}</div>`
+      : "";
+    const toggle = (a.collapsible || (a.detail && a.detail.length > 160) || a.subEvents)
+      ? `<button class="card-toggle" type="button" data-toggle>Chi tiết <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>`
+      : "";
+    const collapsed = a.collapsible ? " collapsed" : "";
+
+    return `
+      <article class="activity" data-category="${a.category}" data-search="${escapeHtml((a.title + " " + (a.detail || "") + " " + (a.note || "")).toLowerCase())}">
+        <div class="activity-dot" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${iconForCategory(a.category)}</svg>
+        </div>
+        <div class="activity-card${collapsed}">
+          <div class="activity-top">
+            <span class="activity-time">${escapeHtml(a.time)}</span>
+            <h4 class="activity-title">${escapeHtml(a.title)}</h4>
+            <span class="activity-tag ${a.category}">${escapeHtml(tag)}</span>
+          </div>
+          <div class="activity-detail activity-detail-full">${escapeHtml(a.detail || "")}</div>
+          ${sub}
+          ${note}
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;align-items:center">
+            ${mapsBtn}
+            ${toggle}
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderItinerary() {
+    $("#filterChips").innerHTML = CONFIG.categoryFilters.map((f, i) => `
+      <button class="filter-chip${i === 0 ? " active" : ""}" data-filter="${f.id}" type="button">${escapeHtml(f.label)}</button>
+    `).join("");
+
+    $("#itineraryRoot").innerHTML = tripData.days.map(d => `
+      <div class="day-section" id="${d.id}">
+        <div class="day-header">
+          <div>
+            <div class="day-badge">${escapeHtml(d.badge)}</div>
+            <h3 style="margin-top:0.5rem">${escapeHtml(d.label)} · ${escapeHtml(d.dateDisplay)}</h3>
+            <div class="day-date">${escapeHtml(d.dateVi)} · ${d.activities.length} hoạt động</div>
+          </div>
+        </div>
+        <div class="timeline">
+          ${d.activities.map(renderActivity).join("")}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function renderRoute() {
+    const mobile = tripData.route.map((n, i) => {
+      const isLast = i === tripData.route.length - 1;
+      const mode = n.mode ? `<div class="route-mode">${escapeHtml(n.mode)}</div>` : "";
+      return `
+        ${i > 0 ? mode : ""}
+        <div class="route-node">
+          <div class="route-marker">
+            <div class="route-dot${n.end || isLast ? " end" : ""}"></div>
+            ${!isLast ? '<div class="route-line"></div>' : ""}
+          </div>
+          <div class="route-body">
+            <div class="route-name">${escapeHtml(n.name)}</div>
+            <div class="route-desc">${escapeHtml(n.desc)}</div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    const desktop = tripData.route.map((n, i) => {
+      const arrow = i < tripData.route.length - 1
+        ? `<div class="route-arrow">
+            <svg width="28" height="12" viewBox="0 0 28 12" fill="none"><path d="M0 6h24M20 1l6 5-6 5" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>${escapeHtml(tripData.route[i + 1].mode || "→")}</span>
+          </div>`
+        : "";
+      return `
+        <div class="route-col">
+          <div class="route-dot${n.end ? " end" : ""}" style="margin-bottom:0.75rem"></div>
+          <div class="route-name" style="font-size:1rem">${escapeHtml(n.name)}</div>
+          <div class="route-desc">${escapeHtml(n.desc)}</div>
+        </div>
+        ${arrow}
+      `;
+    }).join("");
+
+    $("#routeRoot").innerHTML = `
+      <div class="route-track mobile-route">${mobile}</div>
+      <div class="route-track desktop-route">${desktop}</div>
+      <div class="maps-actions">
+        <a class="btn btn-primary btn-sm" href="${mapsUrl("Cát Bà Hải Phòng")}" target="_blank" rel="noopener">Mở bản đồ Cát Bà</a>
+        <a class="btn btn-ghost btn-sm" href="${mapsUrl("Vịnh Lan Hạ Cát Bà")}" target="_blank" rel="noopener">Vịnh Lan Hạ</a>
+        <a class="btn btn-ghost btn-sm" href="${mapsUrl(tripData.overview.departureAddress)}" target="_blank" rel="noopener">Điểm xuất phát</a>
+      </div>
+    `;
+  }
+
+  function renderDestinations() {
+    $("#destinationsRoot").innerHTML = tripData.destinations.map(d => `
+      <article class="info-card reveal">
+        <h3>${escapeHtml(d.name)}</h3>
+        <p>${escapeHtml(d.detail)}</p>
+        <div class="chip-row">
+          <a class="btn btn-ghost btn-sm" href="${mapsUrl(d.mapsQuery)}" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderStayFood() {
+    const stay = tripData.accommodations.map(a => `
+      <article class="info-card reveal">
+        <div class="section-label" style="margin-bottom:0.4rem">Stay</div>
+        <h3>${escapeHtml(a.name)}</h3>
+        <p>${escapeHtml(a.detail)}</p>
+        <div class="chip-row">
+          <span class="chip">${escapeHtml(a.nights)}</span>
+          <span class="chip">${escapeHtml(a.restaurant)}</span>
+        </div>
+        <p style="margin-top:0.85rem;font-size:0.85rem">${escapeHtml(a.note)}</p>
+      </article>
+    `).join("");
+
+    const meals = tripData.meals.map(m => `
+      <article class="info-card meal-card reveal">
+        <div class="meal-when">${escapeHtml(m.when)}</div>
+        <h3>${escapeHtml(m.place || "Chưa chọn quán cụ thể")}</h3>
+        <p>${escapeHtml(m.note)}</p>
+        <div class="meal-status">${escapeHtml(m.status)}</div>
+      </article>
+    `).join("");
+
+    $("#stayFoodRoot").innerHTML = stay + meals;
+  }
+
+  function renderTransport() {
+    $("#transportRoot").innerHTML = tripData.transport.map(t => `
+      <article class="info-card reveal">
+        <h3>${escapeHtml(t.name)}</h3>
+        <p>${escapeHtml(t.detail)}</p>
+        ${t.provider ? `<p style="margin-top:0.5rem"><strong>${escapeHtml(t.provider)}</strong>${t.phoneDisplay ? ` · <a href="tel:${t.phone}">${escapeHtml(t.phoneDisplay)}</a> <button class="copy-btn" type="button" data-copy="${t.phone}">Sao chép</button>` : ""}</p>` : ""}
+        ${t.contact ? `<p style="margin-top:0.35rem">${escapeHtml(t.contact.name)} · <a href="tel:${t.contact.phone}">${escapeHtml(t.contact.phoneDisplay)}</a> <button class="copy-btn" type="button" data-copy="${t.contact.phone}">Sao chép</button></p>` : ""}
+        <div class="chip-row">
+          ${t.cost != null ? `<span class="chip">${formatVND(t.cost)}</span>` : ""}
+          ${t.formula ? `<span class="chip">${escapeHtml(t.formula)}</span>` : ""}
+          ${t.deposit != null ? `<span class="chip">Cọc ${formatVND(t.deposit)}</span>` : ""}
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderBudget() {
+    const withAmount = tripData.expenses.filter(e => e.amount != null);
+    const total = tripData.expenseTotal;
+    let angle = 0;
+    const stops = withAmount.map((e, i) => {
+      const pct = e.amount / total;
+      const start = angle;
+      angle += pct * 360;
+      return { ...e, pct, color: CONFIG.chartColors[i % CONFIG.chartColors.length], start, end: angle };
+    });
+    const gradient = stops.map(s => `${s.color} ${s.start}deg ${s.end}deg`).join(", ");
+
+    const summary = `
+      <div class="budget-summary">
+        <div>
+          <div class="budget-total-label">Tổng chi phí dự trù</div>
+          <div class="budget-total-value">${formatVND(total)}</div>
+          <div class="budget-total-note">${escapeHtml(tripData.expenseTotalNote)}</div>
+          <div class="budget-total-note">≈ ${formatVND(Math.round(total / tripData.overview.members))}/người (ước tính theo tổng hiện có)</div>
+        </div>
+        <div class="budget-chart-wrap">
+          <div class="donut" style="background: conic-gradient(${gradient})">
+            <div class="donut-hole">${withAmount.length}<br>khoản</div>
+          </div>
+          <div class="budget-legend">
+            ${stops.map(s => `<span><i class="swatch" style="background:${s.color}"></i>${Math.round(s.pct * 100)}%</span>`).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+
+    const list = `
+      <div class="expense-list">
+        ${tripData.expenses.map(e => {
+          const pct = e.amount != null ? (e.amount / total) * 100 : 0;
+          return `
+            <article class="expense-item">
+              <div class="expense-top">
+                <div class="expense-name">${e.stt}. ${escapeHtml(e.name)}</div>
+                <div class="expense-amount${e.amount == null ? " pending" : ""}">${e.amount != null ? formatVND(e.amount) : "Chưa có số liệu"}</div>
+              </div>
+              ${e.amount != null ? `<div class="expense-bar"><i data-width="${pct}"></i></div>
+              <div class="expense-meta">${pct.toFixed(1)}% tổng</div>` : `<div class="expense-bar"><i data-width="0"></i></div>`}
+              ${e.formula ? `<div class="expense-meta">Công thức: ${escapeHtml(e.formula)}</div>` : ""}
+              ${e.note ? `<div class="expense-note">${escapeHtml(e.note)}</div>` : ""}
+            </article>
+          `;
+        }).join("")}
+      </div>
+    `;
+
+    $("#budgetRoot").innerHTML = summary + list;
+  }
+
+  function renderBookings() {
+    $("#bookingsRoot").innerHTML = tripData.bookings.map(b => `
+      <article class="info-card reveal">
+        <div class="chip-row" style="margin-top:0;margin-bottom:0.6rem">
+          <span class="chip">${escapeHtml(b.status)}</span>
+        </div>
+        <h3>${escapeHtml(b.title)}</h3>
+        <p>${escapeHtml(b.detail)}</p>
+        ${b.amount != null ? `<p style="margin-top:0.6rem;font-weight:650;color:var(--deep-green)">${formatVND(b.amount)}</p>` : ""}
+        ${b.phone ? `<p style="margin-top:0.5rem"><a class="contact-phone" href="tel:${b.phone}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          ${escapeHtml(b.phoneDisplay)}
+        </a> <button class="copy-btn" type="button" data-copy="${b.phone}">Sao chép</button></p>` : ""}
+      </article>
+    `).join("");
+  }
+
+  function loadChecklistState() {
+    try {
+      return JSON.parse(localStorage.getItem(CONFIG.storageKey) || "{}");
+    } catch {
+      return {};
+    }
+  }
+
+  function saveChecklistState(state) {
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(state));
+  }
+
+  function renderChecklist() {
+    const state = loadChecklistState();
+    $("#checklistRoot").innerHTML = tripData.checklist.map((g, gi) => {
+      const items = g.items.map((item, ii) => {
+        const key = `${gi}-${ii}`;
+        const done = !!state[key];
+        return `
+          <label class="check-item${done ? " done" : ""}" data-key="${key}">
+            <span class="check-box" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="check-text">${escapeHtml(item)}</span>
+          </label>
+        `;
+      }).join("");
+      const doneCount = g.items.filter((_, ii) => state[`${gi}-${ii}`]).length;
+      return `
+        <div class="check-group">
+          <h3>${escapeHtml(g.group)} <span class="check-progress">${doneCount}/${g.items.length}</span></h3>
+          ${items}
+        </div>
+      `;
+    }).join("");
+    updateCheckProgress();
+  }
+
+  function updateCheckProgress() {
+    const state = loadChecklistState();
+    const total = tripData.checklist.reduce((n, g) => n + g.items.length, 0);
+    const done = Object.values(state).filter(Boolean).length;
+    $("#checkProgress").textContent = `${done} / ${total} hoàn thành`;
+    $$(".check-group").forEach((groupEl, gi) => {
+      const items = tripData.checklist[gi].items;
+      const c = items.filter((_, ii) => state[`${gi}-${ii}`]).length;
+      const prog = groupEl.querySelector(".check-progress");
+      if (prog) prog.textContent = `${c}/${items.length}`;
+    });
+  }
+
+  function renderContacts() {
+    $("#contactsRoot").innerHTML = tripData.contacts.map(c => `
+      <article class="info-card contact-card reveal">
+        <div class="contact-role">${escapeHtml(c.role)}</div>
+        <div class="contact-name">${escapeHtml(c.name)}</div>
+        <p>${escapeHtml(c.note)}</p>
+        <a class="contact-phone" href="tel:${c.phone}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          ${escapeHtml(c.phoneDisplay)}
+        </a>
+        <div>
+          <button class="btn btn-ghost btn-sm" type="button" data-copy="${c.phone}">Sao chép số</button>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function renderNotes() {
+    const notes = [];
+    tripData.days.forEach(d => {
+      d.activities.forEach(a => {
+        if (a.note) {
+          notes.push({
+            title: `${d.label} · ${a.time} · ${a.title}`,
+            body: a.note
+          });
+        }
+      });
+    });
+    $("#notesRoot").innerHTML = notes.map(n => `
+      <div class="note-block reveal">
+        <h4>${escapeHtml(n.title)}</h4>
+        <p>${escapeHtml(n.body)}</p>
+      </div>
+    `).join("");
+  }
+
+  function renderDetails() {
+    $("#detailsRoot").innerHTML = `
+      <div class="note-block reveal">
+        <h4>Thông tin tổng quan (nguyên văn Excel)</h4>
+        <p>${escapeHtml(tripData.overview.summaryLine)}</p>
+      </div>
+      <div class="note-block reveal">
+        <h4>Địa chỉ xuất phát</h4>
+        <p>${escapeHtml(tripData.overview.departureAddress)}</p>
+        <div class="maps-actions">
+          <a class="btn btn-ghost btn-sm" href="${mapsUrl(tripData.overview.departureAddress)}" target="_blank" rel="noopener">Mở Maps</a>
+        </div>
+      </div>
+      ${tripData.additionalInfo.map(i => `
+        <div class="note-block reveal">
+          <h4>${escapeHtml(i.title)}</h4>
+          <p>${escapeHtml(i.body)}</p>
+        </div>
+      `).join("")}
+    `;
+  }
+
+  function renderMobileMenu() {
+    const links = [
+      ["#overview", "Tổng quan"],
+      ["#itinerary", "Lịch trình"],
+      ["#route", "Lộ trình"],
+      ["#stay-food", "Ở & Ăn"],
+      ["#budget", "Chi phí"],
+      ["#checklist", "Checklist"],
+      ["#contacts", "Liên hệ"],
+      ["#notes", "Ghi chú"]
+    ];
+    $("#mobileMenu").innerHTML = links.map(([href, label]) =>
+      `<a href="${href}">${label}</a>`
+    ).join("");
+  }
+
+  /* =========================================================
+     INTERACTION
+     ========================================================= */
+  function setupDayNav() {
+    const chips = $$(".day-chip");
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const id = chip.dataset.day;
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const sections = tripData.days.map(d => document.getElementById(d.id)).filter(Boolean);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          chips.forEach(c => c.classList.toggle("active", c.dataset.day === entry.target.id));
+        }
+      });
+    }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+
+    sections.forEach(s => io.observe(s));
+  }
+
+  function setupFilters() {
+    let activeFilter = "all";
+    const input = $("#searchInput");
+
+    function apply() {
+      const q = (input.value || "").trim().toLowerCase();
+      $$(".activity").forEach(el => {
+        const catOk = activeFilter === "all" || el.dataset.category === activeFilter;
+        const searchOk = !q || (el.dataset.search || "").includes(q);
+        el.classList.toggle("hidden-filter", !(catOk && searchOk));
+      });
+    }
+
+    $$(".filter-chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        $$(".filter-chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeFilter = chip.dataset.filter;
+        apply();
+      });
+    });
+
+    input.addEventListener("input", apply);
+  }
+
+  function setupToggles() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-toggle]");
+      if (!btn) return;
+      const card = btn.closest(".activity-card");
+      if (card) card.classList.toggle("collapsed");
+    });
+  }
+
+  function setupCopy() {
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-copy]");
+      if (!btn) return;
+      copyText(btn.dataset.copy);
+    });
+  }
+
+  function setupChecklist() {
+    $("#checklistRoot").addEventListener("click", (e) => {
+      const item = e.target.closest(".check-item");
+      if (!item) return;
+      e.preventDefault();
+      const key = item.dataset.key;
+      const state = loadChecklistState();
+      state[key] = !state[key];
+      saveChecklistState(state);
+      item.classList.toggle("done", !!state[key]);
+      updateCheckProgress();
+    });
+
+    $("#resetChecklist").addEventListener("click", () => {
+      localStorage.removeItem(CONFIG.storageKey);
+      renderChecklist();
+      showToast("Đã xóa đánh dấu checklist");
+    });
+  }
+
+  function setupReveal() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          if (entry.target.classList.contains("activity")) {
+            // stagger siblings lightly
+          }
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    $$(".reveal, .activity").forEach((el, i) => {
+      el.style.transitionDelay = (i % 8) * 0.04 + "s";
+      io.observe(el);
+    });
+  }
+
+  function setupBudgetBars() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll(".expense-bar > i").forEach(bar => {
+            bar.style.width = (bar.dataset.width || 0) + "%";
+          });
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    const root = $("#budgetRoot");
+    if (root) io.observe(root);
+  }
+
+  function setupMobileMenu() {
+    const toggle = $("#menuToggle");
+    const menu = $("#mobileMenu");
+    toggle.addEventListener("click", () => menu.classList.toggle("open"));
+    menu.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") menu.classList.remove("open");
+    });
+  }
+
+  function setupNavActive() {
+    const links = $$(".nav-links a");
+    const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + entry.target.id));
+        }
+      });
+    }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  }
+
+  /* =========================================================
+     INIT
+     ========================================================= */
+  function init() {
+    try {
+      document.title = tripData.overview.title;
+      renderHero();
+      renderOverview();
+      renderDayNav();
+      renderItinerary();
+      renderRoute();
+      renderDestinations();
+      renderStayFood();
+      renderTransport();
+      renderBudget();
+      renderBookings();
+      renderChecklist();
+      renderContacts();
+      renderNotes();
+      renderDetails();
+      renderMobileMenu();
+
+      setupDayNav();
+      setupFilters();
+      setupToggles();
+      setupCopy();
+      setupChecklist();
+      setupReveal();
+      setupBudgetBars();
+      setupMobileMenu();
+      setupNavActive();
+      document.body.classList.add("is-ready");
+    } catch (err) {
+      const el = document.getElementById("bootFallback");
+      if (el) {
+        el.innerHTML = "Không tải được trang trên thiết bị này.<br>Hãy mở bằng Safari hoặc Chrome.<br><small style='opacity:.7'>" +
+          String(err && err.message ? err.message : err) + "</small>";
+        el.style.display = "block";
+      }
+      console.error(err);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  </script>
+</body>
+</html>
