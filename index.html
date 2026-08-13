@@ -1299,6 +1299,335 @@
       transform: none;
     }
 
+
+    /* ===== HERO IMAGE ===== */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+    }
+    .hero-bg .hero-fallback {
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(74, 111, 165, 0.45), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(196, 120, 90, 0.35), transparent 50%),
+        linear-gradient(145deg, #1b4332 0%, #2d6a4f 40%, #4a6fa5 100%);
+    }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(27, 67, 50, 0.25) 0%, rgba(27, 67, 50, 0.72) 55%, rgba(27, 67, 50, 0.94) 100%);
+      pointer-events: none;
+    }
+    .hero {
+      background: #1b4332;
+    }
+    .hero::before { z-index: 1; }
+    .hero-wave { z-index: 2; }
+    .hero-content { z-index: 3; }
+
+    /* ===== MEDIA / FALLBACK ===== */
+    .media-frame {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, var(--sand), var(--sand-deep));
+      border-radius: inherit;
+    }
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .media-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      color: var(--deep-green);
+      font-size: 0.85rem;
+      font-weight: 500;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(74, 111, 165, 0.18), transparent 50%),
+        linear-gradient(145deg, var(--sand), #c8d5c0);
+    }
+    .media-frame.is-broken .media-fallback { display: grid; }
+    .media-frame.is-broken img { display: none; }
+
+    /* ===== DAY HIGHLIGHT + TIPS ===== */
+    .day-highlight {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (min-width: 720px) {
+      .day-highlight {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: stretch;
+      }
+    }
+    .day-highlight-media {
+      border-radius: var(--radius);
+      aspect-ratio: 16 / 10;
+      border: 1px solid var(--line);
+      cursor: zoom-in;
+    }
+    .day-highlight-caption {
+      margin-top: 0.55rem;
+      font-size: 0.8rem;
+      color: var(--charcoal-muted);
+    }
+    .day-tips {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .day-tips-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    /* ===== TIP CARDS ===== */
+    .tip-card {
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.05rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      height: 100%;
+      transition: box-shadow 0.25s, border-color 0.25s;
+    }
+    .tip-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--sand-deep);
+    }
+    .tip-card.compact { padding: 0.9rem 1rem; }
+    .tip-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 650;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-blue);
+    }
+    .tip-cat svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .tip-cat.weather { color: var(--muted-blue); }
+    .tip-cat.transport { color: var(--muted-blue); }
+    .tip-cat.food { color: var(--terracotta); }
+    .tip-cat.local, .tip-cat.culture { color: var(--deep-green-soft); }
+    .tip-cat.safety, .tip-cat.packing { color: var(--terracotta); }
+    .tip-cat.money { color: var(--deep-green); }
+    .tip-card h4 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      line-height: 1.3;
+    }
+    .tip-card p {
+      font-size: 0.9rem;
+      color: var(--charcoal-muted);
+      line-height: 1.55;
+    }
+    .tip-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.75rem;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 0.35rem;
+    }
+    .tip-day-chip {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      background: var(--sand);
+      color: var(--deep-green);
+    }
+    .tip-source {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .tip-source:hover { text-decoration: underline; }
+    .tip-source svg { width: 12px; height: 12px; }
+
+    .tips-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+    @media (min-width: 640px) {
+      .tips-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1000px) {
+      .tips-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .tip-card.is-filtered-out { display: none; }
+
+    /* ===== DESTINATION MEDIA ===== */
+    .info-card.has-media { padding: 0; overflow: hidden; }
+    .info-card.has-media .card-media {
+      aspect-ratio: 16 / 10;
+      border-radius: 0;
+      cursor: zoom-in;
+    }
+    .info-card.has-media .card-media .media-frame {
+      height: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 0;
+    }
+    .info-card.has-media .card-body { padding: 1.2rem 1.25rem 1.35rem; }
+    .hero-bg .hero-fallback {
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+    .hero-bg img {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      columns: 1;
+      column-gap: 0.85rem;
+    }
+    @media (min-width: 640px) { .gallery-grid { columns: 2; } }
+    @media (min-width: 1000px) { .gallery-grid { columns: 3; } }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 0.85rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--warm-white);
+      cursor: zoom-in;
+      position: relative;
+    }
+    .gallery-item .media-frame {
+      border-radius: 0;
+      aspect-ratio: auto;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .gallery-item.tall img { aspect-ratio: 3 / 4; }
+    .gallery-item.wide img { aspect-ratio: 16 / 9; }
+    .gallery-caption {
+      padding: 0.75rem 0.9rem 0.9rem;
+    }
+    .gallery-caption .loc {
+      font-size: 0.7rem;
+      font-weight: 650;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.2rem;
+    }
+    .gallery-caption .title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(20, 28, 24, 0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      padding-bottom: calc(1.25rem + var(--safe-bottom));
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      width: min(960px, 100%);
+      max-height: min(90vh, 900px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .lightbox-media {
+      flex: 1;
+      min-height: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111;
+      position: relative;
+    }
+    .lightbox-media img {
+      width: 100%;
+      height: min(72vh, 720px);
+      object-fit: contain;
+      margin: 0 auto;
+    }
+    .lightbox-meta {
+      color: rgba(247, 243, 235, 0.92);
+      text-align: center;
+    }
+    .lightbox-meta .loc {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.25rem;
+    }
+    .lightbox-meta .cap {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: calc(0.75rem + var(--safe-top));
+      right: 0.75rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(247, 243, 235, 0.12);
+      color: var(--cream);
+      display: grid;
+      place-items: center;
+      z-index: 2;
+    }
+    .lightbox-close:hover { background: rgba(247, 243, 235, 0.22); }
+
     /* ===== RESPONSIVE ===== */
     @media (min-width: 640px) {
       .overview-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1358,7 +1687,7 @@
       body { background: white; color: black; font-size: 11pt; }
       .topnav, .day-nav-wrap, .hero-cta, .toolbar, .checklist-toolbar,
       .maps-actions, .card-toggle, .toast, .mobile-menu, .menu-toggle,
-      .icon-btn, .print-hide { display: none !important; }
+      .icon-btn, .print-hide, .lightbox, .tips-filters { display: none !important; }
       .hero {
         min-height: auto;
         padding: 1.5rem 0;
@@ -1395,11 +1724,11 @@
       <div class="nav-links" id="navLinks">
         <a href="#overview">Tổng quan</a>
         <a href="#itinerary">Lịch trình</a>
-        <a href="#route">Lộ trình</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#tips">Tips</a>
         <a href="#stay-food">Ở &amp; Ăn</a>
         <a href="#budget">Chi phí</a>
         <a href="#checklist">Checklist</a>
-        <a href="#contacts">Liên hệ</a>
       </div>
       <div class="topnav-actions">
         <button class="icon-btn print-hide" onclick="window.print()" title="In / Lưu PDF" aria-label="In">
@@ -1420,6 +1749,10 @@
   </div>
 
   <header class="hero" id="top">
+    <div class="hero-bg" id="heroBg" aria-hidden="true">
+      <div class="hero-fallback"></div>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-content" id="heroContent"></div>
     <svg class="hero-wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
       <path fill="currentColor" d="M0,40 C240,70 480,10 720,30 C960,50 1200,70 1440,35 L1440,72 L0,72 Z"/>
@@ -1481,6 +1814,29 @@
           <p>Các địa điểm sẽ đi qua trong chuyến đi.</p>
         </div>
         <div class="cards-grid" id="destinationsRoot"></div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Trip Gallery</div>
+          <h2>Không khí chuyến đi</h2>
+          <p>Hình ảnh gắn với các điểm trong lịch trình Cát Bà — Vịnh Lan Hạ, bãi Cát Cò và thị trấn.</p>
+        </div>
+        <div class="gallery-grid" id="galleryRoot"></div>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Travel Tips</div>
+          <h2>Make the most of your trip</h2>
+          <p>Gợi ý gắn với lịch trình 14–16/8/2026 — thời tiết tháng 8, cáp treo, Vịnh Lan Hạ và đặc sản Cát Bà.</p>
+        </div>
+        <div class="tips-filters print-hide reveal" id="tipsFilters" role="tablist" aria-label="Lọc tip theo chủ đề"></div>
+        <div class="tips-grid" id="tipsRoot"></div>
       </div>
     </section>
 
@@ -1586,6 +1942,19 @@
       <p style="margin-top:0.5rem;opacity:0.7">Dữ liệu nguồn: Kế hoạch du lịch Cát Bà.xlsx</p>
     </div>
   </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+    <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Đóng">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="lightbox-inner">
+      <div class="lightbox-media"><img id="lightboxImg" alt="" /></div>
+      <div class="lightbox-meta">
+        <div class="loc" id="lightboxLoc"></div>
+        <div class="cap" id="lightboxCap"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="toast" id="toast" role="status"></div>
 
@@ -1976,7 +2345,7 @@
         detail: "380k/người · 7 người. Đã cọc 500k, hoàn thành tour thanh toán nốt.",
         cost: 2660000,
         formula: "380.000 × 7",
-        contact: { name: "em Thảo Tiên", phone: "0368236422", phoneDisplay: "0368 236 422" },
+        contact: { name: "Đơn vị tour Vịnh Lan Hạ", phone: "0368236422", phoneDisplay: "0368 236 422" },
         deposit: 500000
       },
       {
@@ -2006,7 +2375,7 @@
         stt: 3,
         name: "Vé du thuyền Vịnh Lan Hạ 380k/người",
         amount: 2660000,
-        note: "Đã cọc 500k, hoàn thành tour thanh toán nốt (em Thảo Tiên 0368 236 422)",
+        note: "Đã cọc 500k, hoàn thành tour thanh toán nốt (liên hệ tour 0368 236 422)",
         formula: "380000×7",
         category: "activity"
       },
@@ -2072,7 +2441,7 @@
         detail: "380k/người × 7 người = 2.660.000đ. Đã cọc 500k, hoàn thành tour thanh toán nốt.",
         amount: 2660000,
         deposit: 500000,
-        contact: "em Thảo Tiên",
+        contact: "Đơn vị tour",
         phone: "0368236422",
         phoneDisplay: "0368 236 422",
         status: "Đã cọc 500.000đ"
@@ -2101,7 +2470,7 @@
       },
       {
         role: "Tour Vịnh Lan Hạ",
-        name: "em Thảo Tiên",
+        name: "Đơn vị tour Vịnh Lan Hạ",
         phone: "0368236422",
         phoneDisplay: "0368 236 422",
         note: "Đã cọc 500k, hoàn thành tour thanh toán nốt"
@@ -2212,6 +2581,324 @@
     ]
   };
 
+
+  /* =========================================================
+     TRAVEL TIPS — researched for this itinerary (Aug 2026)
+     ========================================================= */
+  const travelTips = [
+    {
+      id: "tip-aug-weather",
+      category: "weather",
+      day: 1,
+      location: "Cát Bà",
+      title: "Tháng 8: mưa chiều ngắn, biển vẫn ấm",
+      content: "Tháng 8 tại Cát Bà thường khoảng 26–32°C, độ ẩm cao. Mưa thường đến nhanh vào buổi chiều rồi tạnh. Tour Vịnh Lan Hạ của đoàn (14:45–18:30) trùng khung mưa chiều — chuẩn bị áo mưa mỏng / túi chống nước và theo dõi dự báo trong ngày.",
+      source: "Vietnam Tourism",
+      sourceUrl: "https://www.vietnamtourism.com/en/cat-ba-weather-complete-guide-to-visiting-the-island-at-the-best-time"
+    },
+    {
+      id: "tip-typhoon",
+      category: "safety",
+      day: 1,
+      location: "Vịnh Lan Hạ",
+      title: "Mùa bão vịnh Bắc Bộ — kiểm tra trước giờ lên tàu",
+      content: "Tháng 7–10 là mùa bão / áp thấp nhiệt đới. Nếu có cảnh báo, tour biển và kayak có thể hủy sát giờ. Trước khi ra Bến Bèo, hỏi lại đơn vị tổ chức tour và theo dõi cảnh báo khí tượng thủy văn Việt Nam.",
+      source: "Vietnam Tourism",
+      sourceUrl: "https://www.vietnamtourism.com/en/cat-ba-weather-complete-guide-to-visiting-the-island-at-the-best-time"
+    },
+    {
+      id: "tip-morning-bias",
+      category: "local",
+      day: 2,
+      location: "Bãi Cát Cò",
+      title: "Buổi sáng khô hơn — hợp tắm biển sớm",
+      content: "Vào mùa mưa, buổi sáng thường khô và dịu hơn chiều. Lịch 05:00–07:00 tại Cát Cò của đoàn khớp với khung này: ánh sáng đẹp, ít người, giảm rủi ro mưa chiều.",
+      source: "Vietnam Tourism",
+      sourceUrl: "https://www.vietnamtourism.com/en/cat-ba-weather-complete-guide-to-visiting-the-island-at-the-best-time"
+    },
+    {
+      id: "tip-cable-car",
+      category: "transport",
+      day: 1,
+      location: "Ga Cát Hải",
+      title: "Cáp treo Cát Hải → Phù Long: đến sớm cho chuyến 9h",
+      content: "Tuyến khoảng 4 km, thời gian cabin khoảng 10–15 phút. Lịch chạy thường theo khung sáng/chiều và có thể đổi theo mùa. Đoàn dự kiến chuyến sớm 9:00 — nên có mặt ga Cát Hải trước 15–20 phút để check vé, đặc biệt với nhóm 7 người.",
+      source: "Sun World Cat Ba (tổng hợp vận hành)",
+      sourceUrl: "https://catbaexpress.com/cap-treo-cat-ba.html"
+    },
+    {
+      id: "tip-cable-return",
+      category: "transport",
+      day: 2,
+      location: "Ga Phù Long",
+      title: "Chiều về: chừa buffer trước khung cáp cuối",
+      content: "Lịch đoàn ra Phù Long khoảng 14:00–14:30. Khung chiều của cáp treo thường kết thúc sớm hơn buổi tối (khoảng giữa–cuối chiều). Check-out xong nên xuất phát đúng giờ để không dồn sát chuyến cuối; nếu lỡ, phương án dự phòng là phà Đồng Bài (thời gian dài hơn).",
+      source: "Sun World Cat Ba (tổng hợp vận hành)",
+      sourceUrl: "https://catbaduky.vn/cap-nhat-ve-khu-vui-choi-va-ve-cap-treo-sun-world-cat-ba-moi-nhat"
+    },
+    {
+      id: "tip-kayak-status",
+      category: "local",
+      day: 1,
+      location: "Vịnh Lan Hạ",
+      title: "Xác nhận kayak với đơn vị tour trước ngày đi",
+      content: "Cuối 2024, UBND huyện Cát Hải từng yêu cầu tạm dừng dịch vụ kayak trên vịnh thuộc quần đảo Cát Bà để siết điều kiện an toàn. Lịch đoàn có mục kayak 16:30–17:40 — hỏi rõ đơn vị tổ chức tour hoạt động nào còn trong lịch tháng 8/2026 (kayak / tắm biển / nhảy tàu).",
+      source: "Báo Dân trí / UBND Cát Hải",
+      sourceUrl: "https://dantri.com.vn/du-lich/dung-cheo-thuyen-kayak-o-lan-ha-khach-tay-tiec-nuoi-doanh-nghiep-boi-roi-20241120174714373.htm"
+    },
+    {
+      id: "tip-lanha-bay",
+      category: "local",
+      day: 1,
+      location: "Vịnh Lan Hạ",
+      title: "Lan Hạ: vịnh kín, ít đông hơn Hạ Long",
+      content: "Vịnh Lan Hạ nằm phía đông đảo Cát Bà, hơn 7.000 ha với hàng trăm đảo đá vôi, thuộc vùng bảo tồn của Vườn quốc gia Cát Bà. Nước thường êm hơn nhờ địa hình che chắn — phù hợp tour nửa ngày từ Bến Bèo như lịch đoàn.",
+      source: "Cat Ba National Park",
+      sourceUrl: "https://catbanationalpark.vn/"
+    },
+    {
+      id: "tip-lifejacket",
+      category: "safety",
+      day: 1,
+      location: "Vịnh Lan Hạ",
+      title: "Áo phao khi xuống nước — kể cả biết bơi",
+      content: "Phần kayak / tắm biển / nhảy tàu trong tour là tự nguyện. Nên mặc áo phao khi xuống nước, giữ khoảng cách với thuyền khác, và để điện thoại trong túi chống nước (đã có trong checklist đoàn).",
+      source: "Cat Ba National Park",
+      sourceUrl: "https://catbanationalpark.com/overview-of-ecotourism"
+    },
+    {
+      id: "tip-cai-beo",
+      category: "culture",
+      day: 1,
+      location: "Làng chài Cái Bèo",
+      title: "Thăm làng chài: hỏi trước khi chụp cận cảnh",
+      content: "Cái Bèo là làng chài nổi trong lịch tour 14:45. Đây là không gian sinh sống thực. Nên hỏi trước khi chụp chân dung gần, không xả rác xuống nước, và tránh làm ồn khi tàu đi chậm qua nhà nổi.",
+      source: "Visit Ha Long Bay",
+      sourceUrl: "https://www.visithalongbay.com/islands/cat-ba-island.html"
+    },
+    {
+      id: "tip-food-seafood",
+      category: "food",
+      day: 1,
+      location: "Thị trấn Cát Bà",
+      title: "Ăn tối gần quảng trường: ưu tiên hải sản theo mùa",
+      content: "Bữa tối 15/8 chưa chốt quán — khu gần quảng trường / đường 1/4 tiện dạo biển và xem pháo hoa. Nên hỏi giá theo kg trước khi chế biến; với nhóm 7 người, đặt bàn trước giờ cao điểm tối.",
+      source: "Kinh nghiệm địa phương Cát Bà",
+      sourceUrl: "https://catbaexpress.com/hai-san-cat-ba-va-dac-san.html"
+    },
+    {
+      id: "tip-market-gifts",
+      category: "food",
+      day: 2,
+      location: "Chợ Cát Bà",
+      title: "Mua quà: mực khô, cá thu một nắng — tránh hải sản tươi xa đường",
+      content: "Đặc sản dễ mang về: mực khô / mực một nắng, cá thu một nắng, nước mắm Cát Hải. Khớp ghi chú lịch trình: không mua quá nhiều hải sản tươi nếu phải ngồi xe về Hà Nội chiều 16/8.",
+      source: "Đặc sản Cát Bà",
+      sourceUrl: "https://catbaexpress.com/hai-san-cat-ba-va-dac-san.html"
+    },
+    {
+      id: "tip-money",
+      category: "money",
+      day: 2,
+      location: "Chợ Cát Bà",
+      title: "Chợ và quán nhỏ: ưu tiên tiền mặt",
+      content: "KS / nhà hàng lớn thường nhận chuyển khoản hoặc thẻ, nhưng chợ hải sản và quán nhỏ vẫn ưu tiên tiền mặt. Đổi / rút đủ tiền trước khi lên đảo; giữ riêng tiền cọc tour còn lại (sau 500k đã cọc) để tất toán khi kết thúc tour.",
+      source: "Cat Ba National Park / thực tế thanh toán tại đảo",
+      sourceUrl: "https://catbanationalpark.vn/"
+    },
+    {
+      id: "tip-taxi-island",
+      category: "transport",
+      day: 2,
+      location: "Trung tâm Cát Bà",
+      title: "Nội đảo: taxi thường rẻ hơn xe điện cho nhóm",
+      content: "Bảng chi phí đoàn đã ghi: book taxi sẽ rẻ hơn xe điện khi di chuyển giữa điểm chơi / tắm biển. Với 7 người, hỏi giá trọn chuyến trước khi lên xe; lưu số nhà xe Sơn Hà phòng khi cần hỗ trợ đưa đón.",
+      source: "Chi phí dự trù chuyến đi",
+      sourceUrl: ""
+    },
+    {
+      id: "tip-packing-rain",
+      category: "packing",
+      day: 0,
+      location: "Hà Nội",
+      title: "Đêm 14/8: thêm áo mưa mỏng + chống muỗi",
+      content: "Checklist đoàn đã đủ đồ biển. Với tháng 8 nên bổ sung: áo mưa / poncho gấp gọn (ô dễ ngược gió trên vịnh), thuốc chống muỗi (ẩm cao), và túi chống nước dư cho đồ ướt sau tour.",
+      source: "Vietnam Tourism",
+      sourceUrl: "https://www.vietnamtourism.com/en/cat-ba-weather-complete-guide-to-visiting-the-island-at-the-best-time"
+    },
+    {
+      id: "tip-cannon-fort",
+      category: "local",
+      day: 2,
+      location: "Pháo đài Thần Công",
+      title: "Pháo đài Thần Công: kiểm tra mở cửa trước khi đi",
+      content: "Lịch sáng 16/8 ghi «nếu thời gian cho phép». Một số nguồn du lịch từng ghi giờ tham khảo buổi sáng–chiều, nhưng tình trạng đón khách có thể thay đổi theo bảo tồn. Gọi hỏi hoặc hỏi lễ tân KS trước khi dành slot 8:30–10:30.",
+      source: "Tổng hợp điểm đến Cát Bà",
+      sourceUrl: "https://www.visithalongbay.com/islands/cat-ba-island.html"
+    },
+    {
+      id: "tip-unesco",
+      category: "culture",
+      day: 1,
+      location: "Cát Bà",
+      title: "Quần đảo Cát Bà là Khu dự trữ sinh quyển UNESCO",
+      content: "Vườn quốc gia Cát Bà (~17.300 ha rừng + biển) nằm trong Khu dự trữ sinh quyển thế giới. Khi kayak / tắm vịnh: không lấy san hô, không xả rác, hạn chế kem chống nắng hóa học mạnh trước khi xuống nước nếu có lựa chọn mineral.",
+      source: "Cat Ba National Park",
+      sourceUrl: "https://catbanationalpark.vn/introduce"
+    },
+    {
+      id: "tip-sunset-tea",
+      category: "local",
+      day: 1,
+      location: "Vịnh Lan Hạ",
+      title: "Giữ chỗ boong tàu cho khung trà chiều / hoàng hôn",
+      content: "Slot 17:40–18:30 là tiệc trà chiều ngắm hoàng hôn — highlight thị giác của ngày 1. Sau khi tắm/kayak, lên tàu sớm vài phút để chiếm góc nhìn thoáng, đặc biệt nếu trời vừa mưa xong (bầu trời thường đẹp).",
+      source: "Vietnam Tourism",
+      sourceUrl: "https://www.vietnamtourism.com/en/cat-ba-weather-complete-guide-to-visiting-the-island-at-the-best-time"
+    },
+    {
+      id: "tip-sea-temp",
+      category: "weather",
+      day: 2,
+      location: "Bãi Cát Cò",
+      title: "Nước biển mùa hè khoảng 28–30°C",
+      content: "Tháng 6–9 nước vịnh / bãi Cát Bà thường ấm, phù hợp tắm sáng. Vẫn nên mang dép đi biển vì lối xuống có thể trơn sau mưa đêm, và không để đồ giá trị trên bãi khi xuống nước.",
+      source: "Vietnam Tourism",
+      sourceUrl: "https://www.vietnamtourism.com/en/cat-ba-weather-complete-guide-to-visiting-the-island-at-the-best-time"
+    }
+  ];
+
+  /* =========================================================
+     TRAVEL IMAGES — Wikimedia Commons (online URLs only)
+     ========================================================= */
+  const travelImages = [
+    {
+      id: "img-hero",
+      location: "Vịnh Lan Hạ",
+      title: "Đá vôi trên Vịnh Lan Hạ",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Rock_formations_in_Lan_Ha_Bay_%2853607514419%29.jpg/1280px-Rock_formations_in_Lan_Ha_Bay_%2853607514419%29.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Rock_formations_in_Lan_Ha_Bay_(53607514419).jpg",
+      role: "hero"
+    },
+    {
+      id: "img-lanha-panorama",
+      location: "Vịnh Lan Hạ",
+      title: "Toàn cảnh Vịnh Lan Hạ",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Panoramic_of_Lan_Ha_Bay.jpg/1280px-Panoramic_of_Lan_Ha_Bay.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Panoramic_of_Lan_Ha_Bay.jpg",
+      role: "day",
+      day: 1,
+      shape: "wide"
+    },
+    {
+      id: "img-lanha-islands",
+      location: "Vịnh Lan Hạ",
+      title: "Quần đảo đá vôi Lan Hạ",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Lan_Ha_Bay_01.jpg/1280px-Lan_Ha_Bay_01.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Lan_Ha_Bay_01.jpg",
+      role: "gallery",
+      shape: "wide"
+    },
+    {
+      id: "img-floating",
+      location: "Làng chài nổi",
+      title: "Nhà nổi trên Vịnh Lan Hạ",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Floating_houses_in_Lan_Ha_Bay_1.jpg/1280px-Floating_houses_in_Lan_Ha_Bay_1.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Floating_houses_in_Lan_Ha_Bay_1.jpg",
+      role: "gallery",
+      destinationMatch: "Làng chài nổi Cái Bèo"
+    },
+    {
+      id: "img-hon-nen",
+      location: "Vịnh Lan Hạ",
+      title: "Hòn nến Cát Bà",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/H%C3%B2n_n%E1%BA%BFn_C%C3%A1t_B%C3%A0.jpg/1280px-H%C3%B2n_n%E1%BA%BFn_C%C3%A1t_B%C3%A0.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:H%C3%B2n_n%E1%BA%BFn_C%C3%A1t_B%C3%A0.jpg",
+      role: "gallery",
+      destinationMatch: "Hòn Rùa",
+      shape: "wide"
+    },
+    {
+      id: "img-catco",
+      location: "Bãi Cát Cò",
+      title: "Bãi Cát Cò 1",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cat_Co_1_Beach-C%C3%A1t_B%C3%A0_Island-Andres_Larin.jpg/1280px-Cat_Co_1_Beach-C%C3%A1t_B%C3%A0_Island-Andres_Larin.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Cat_Co_1_Beach-C%C3%A1t_B%C3%A0_Island-Andres_Larin.jpg",
+      role: "day",
+      day: 2,
+      destinationMatch: "Bãi Cát Cò"
+    },
+    {
+      id: "img-beach-town",
+      location: "Thị trấn Cát Bà",
+      title: "Thị trấn nhìn từ bãi biển",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Cat_Ba_town_viewed_from_the_beach_in_2015_01.jpg/1280px-Cat_Ba_town_viewed_from_the_beach_in_2015_01.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Cat_Ba_town_viewed_from_the_beach_in_2015_01.jpg",
+      role: "gallery",
+      destinationMatch: "Trung tâm Cát Bà",
+      shape: "wide"
+    },
+    {
+      id: "img-harbour",
+      location: "Thị trấn Cát Bà",
+      title: "Bến tàu thị trấn Cát Bà",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Harbour_of_Cat_Ba_island_town_in_2015_05.jpg/1280px-Harbour_of_Cat_Ba_island_town_in_2015_05.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Harbour_of_Cat_Ba_island_town_in_2015_05.jpg",
+      role: "gallery",
+      destinationMatch: "Bến Bèo"
+    },
+    {
+      id: "img-island",
+      location: "Cát Bà",
+      title: "Lan Hạ từ phía đảo Cát Bà",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Lan_Ha_Bay-Cat_Ba_Vietnam-Andres_Larin.jpg/1280px-Lan_Ha_Bay-Cat_Ba_Vietnam-Andres_Larin.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Lan_Ha_Bay-Cat_Ba_Vietnam-Andres_Larin.jpg",
+      role: "gallery",
+      destinationMatch: "Vịnh Lan Hạ",
+      shape: "tall"
+    },
+    {
+      id: "img-bay-green",
+      location: "Vịnh Lan Hạ",
+      title: "Vịnh Lan Hạ – quần đảo Cát Bà",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/V%E1%BB%8Bnh_Lan_H%E1%BA%A1_-_Qu%E1%BA%A7n_%C4%91%E1%BA%A3o_C%C3%A1t_B%C3%A0.jpg/1280px-V%E1%BB%8Bnh_Lan_H%E1%BA%A1_-_Qu%E1%BA%A7n_%C4%91%E1%BA%A3o_C%C3%A1t_B%C3%A0.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:V%E1%BB%8Bnh_Lan_H%E1%BA%A1_-_Qu%E1%BA%A7n_%C4%91%E1%BA%A3o_C%C3%A1t_B%C3%A0.jpg",
+      role: "gallery",
+      shape: "wide"
+    },
+    {
+      id: "img-beach-morning",
+      location: "Bãi biển Cát Bà",
+      title: "Bãi tắm Cát Bà",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Beach_of_Cat_Ba_in_2015_01.jpg/1280px-Beach_of_Cat_Ba_in_2015_01.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Beach_of_Cat_Ba_in_2015_01.jpg",
+      role: "gallery",
+      shape: "wide"
+    },
+    {
+      id: "img-coast",
+      location: "Cát Bà",
+      title: "Ven biển thị trấn Cát Bà",
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/View_of_the_sea_from_the_coast_in_Cat_Ba_town%2C_Vietnam%2C_20240130_1708_4490.jpg/1280px-View_of_the_sea_from_the_coast_in_Cat_Ba_town%2C_Vietnam%2C_20240130_1708_4490.jpg",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:View_of_the_sea_from_the_coast_in_Cat_Ba_town,_Vietnam,_20240130_1708_4490.jpg",
+      role: "day",
+      day: 0,
+      shape: "wide"
+    }
+  ];
+
   /* =========================================================
      CONFIG
      ========================================================= */
@@ -2242,7 +2929,28 @@
       "#5a8f7b",
       "#8b7355"
     ],
-    storageKey: "catba-checklist-v1"
+    storageKey: "catba-checklist-v1",
+    tipCategories: [
+      { id: "all", label: "ALL" },
+      { id: "local", label: "LOCAL" },
+      { id: "food", label: "FOOD" },
+      { id: "transport", label: "TRANSPORT" },
+      { id: "money", label: "MONEY" },
+      { id: "weather", label: "WEATHER" },
+      { id: "safety", label: "SAFETY" },
+      { id: "culture", label: "CULTURE" },
+      { id: "packing", label: "PACKING" }
+    ],
+    tipCategoryLabels: {
+      local: "Local",
+      food: "Food",
+      transport: "Transport",
+      money: "Money",
+      weather: "Weather",
+      safety: "Safety",
+      culture: "Culture",
+      packing: "Packing"
+    }
   };
 
   /* =========================================================
@@ -2299,8 +3007,69 @@
   /* =========================================================
      RENDER
      ========================================================= */
+
+  function tipIcon(cat) {
+    const icons = {
+      weather: '<path d="M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M3 12h2M19 12h2M5.6 18.4l1.4-1.4M17 7l1.4-1.4"/><circle cx="12" cy="12" r="4"/>',
+      transport: '<path d="M5 17h14v-5H5v5z"/><path d="M5 12V7l2-3h10l2 3v5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>',
+      food: '<path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/>',
+      local: '<path d="M12 21s7-4.5 7-11a7 7 0 10-14 0c0 6.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+      culture: '<path d="M4 19h16M6 19V9l6-4 6 4v10"/><path d="M9 19v-5h6v5"/>',
+      safety: '<path d="M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/>',
+      packing: '<path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/><rect x="4" y="7" width="16" height="14" rx="2"/>',
+      money: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/>'
+    };
+    return icons[cat] || icons.local;
+  }
+
+  function dayLabelForTip(day) {
+    const d = tripData.days.find(x => x.dayNumber === day);
+    return d ? d.label : (day != null ? `DAY ${String(day).padStart(2, "0")}` : "");
+  }
+
+  function mediaFigure({ url, alt, lazy = true, priority = false, className = "", caption = "", location = "", title = "" }) {
+    const loading = priority ? 'fetchpriority="high"' : (lazy ? 'loading="lazy"' : "");
+    const decoding = priority ? 'decoding="async"' : 'decoding="async"';
+    return `
+      <div class="media-frame ${className}" data-lightbox-src="${escapeHtml(url)}" data-lightbox-cap="${escapeHtml(title || alt)}" data-lightbox-loc="${escapeHtml(location)}">
+        <img src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" ${loading} ${decoding} referrerpolicy="no-referrer" onerror="window.__imgFallback && window.__imgFallback(this)" />
+        <div class="media-fallback" aria-hidden="true">Image unavailable<br/><span style="opacity:.7;font-size:.78rem">${escapeHtml(location || "Cát Bà")}</span></div>
+      </div>
+      ${caption ? `<div class="day-highlight-caption">${escapeHtml(caption)}</div>` : ""}
+    `;
+  }
+
+  function renderTipCard(tip, { compact = false } = {}) {
+    const catLabel = CONFIG.tipCategoryLabels[tip.category] || tip.category;
+    const dayChip = tip.day != null
+      ? `<span class="tip-day-chip">${escapeHtml(dayLabelForTip(tip.day))} · ${escapeHtml(tip.location || "")}</span>`
+      : (tip.location ? `<span class="tip-day-chip">${escapeHtml(tip.location)}</span>` : "");
+    const source = tip.sourceUrl
+      ? `<a class="tip-source" href="${escapeHtml(tip.sourceUrl)}" target="_blank" rel="noopener">Source · ${escapeHtml(tip.source)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`
+      : (tip.source ? `<span class="tip-source" style="color:var(--charcoal-muted)">Source · ${escapeHtml(tip.source)}</span>` : "");
+    return `
+      <article class="tip-card${compact ? " compact" : " reveal"}" data-tip-category="${escapeHtml(tip.category)}" data-tip-day="${tip.day ?? ""}">
+        <div class="tip-cat ${escapeHtml(tip.category)}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${tipIcon(tip.category)}</svg>
+          ${escapeHtml(catLabel)}
+        </div>
+        <h4>${escapeHtml(tip.title)}</h4>
+        <p>${escapeHtml(tip.content)}</p>
+        <div class="tip-meta">${dayChip}${source}</div>
+      </article>
+    `;
+  }
+
   function renderHero() {
     const o = tripData.overview;
+    const heroImg = travelImages.find(i => i.role === "hero") || travelImages[0];
+    const bg = $("#heroBg");
+    if (bg && heroImg) {
+      bg.innerHTML = `
+        <img src="${escapeHtml(heroImg.url)}" alt="" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; const fb=this.parentElement.querySelector('.hero-fallback'); if(fb){ fb.style.display='block'; }" />
+        <div class="hero-fallback" style="display:none"></div>
+      `;
+    }
     $("#heroContent").innerHTML = `
       <div class="eyebrow">My Trip</div>
       <h1>${escapeHtml(o.destination)}</h1>
@@ -2322,6 +3091,7 @@
       <p style="max-width:36rem;margin-bottom:1.5rem;opacity:0.88;font-size:1.02rem">${escapeHtml(o.title)}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#itinerary">Xem lịch trình</a>
+        <a class="btn btn-ghost" href="#tips">Travel tips</a>
         <a class="btn btn-ghost" href="#budget">Chi phí dự trù</a>
       </div>
     `;
@@ -2404,7 +3174,27 @@
       <button class="filter-chip${i === 0 ? " active" : ""}" data-filter="${f.id}" type="button">${escapeHtml(f.label)}</button>
     `).join("");
 
-    $("#itineraryRoot").innerHTML = tripData.days.map(d => `
+    $("#itineraryRoot").innerHTML = tripData.days.map(d => {
+      const dayImg = travelImages.find(i => i.role === "day" && i.day === d.dayNumber);
+      const dayTips = travelTips.filter(t => t.day === d.dayNumber).slice(0, 3);
+      const highlight = (dayImg || dayTips.length) ? `
+        <div class="day-highlight reveal">
+          ${dayImg ? `<div>${mediaFigure({
+            url: dayImg.url,
+            alt: dayImg.title,
+            location: dayImg.location,
+            title: dayImg.title,
+            className: "day-highlight-media",
+            caption: `${dayImg.location} · ${dayImg.title}`
+          })}</div>` : `<div></div>`}
+          <div class="day-tips">
+            <div class="day-tips-label">${escapeHtml(d.label)} · Tips</div>
+            ${dayTips.length ? dayTips.map(t => renderTipCard(t, { compact: true })).join("") : `<p style="color:var(--charcoal-muted);font-size:0.9rem">Xem thêm gợi ý tại mục Travel Tips.</p>`}
+          </div>
+        </div>
+      ` : "";
+
+      return `
       <div class="day-section" id="${d.id}">
         <div class="day-header">
           <div>
@@ -2413,11 +3203,13 @@
             <div class="day-date">${escapeHtml(d.dateVi)} · ${d.activities.length} hoạt động</div>
           </div>
         </div>
+        ${highlight}
         <div class="timeline">
           ${d.activities.map(renderActivity).join("")}
         </div>
       </div>
-    `).join("");
+    `;
+    }).join("");
   }
 
   function renderRoute() {
@@ -2468,15 +3260,31 @@
   }
 
   function renderDestinations() {
-    $("#destinationsRoot").innerHTML = tripData.destinations.map(d => `
-      <article class="info-card reveal">
-        <h3>${escapeHtml(d.name)}</h3>
-        <p>${escapeHtml(d.detail)}</p>
-        <div class="chip-row">
-          <a class="btn btn-ghost btn-sm" href="${mapsUrl(d.mapsQuery)}" target="_blank" rel="noopener">Google Maps</a>
+    $("#destinationsRoot").innerHTML = tripData.destinations.map(d => {
+      const img = travelImages.find(i => i.destinationMatch === d.name)
+        || (d.name.includes("Lan Hạ") ? travelImages.find(i => i.id === "img-lanha-islands") : null)
+        || (d.name.includes("Cát Cò") ? travelImages.find(i => i.id === "img-catco") : null)
+        || (d.name.includes("Trung tâm") ? travelImages.find(i => i.id === "img-beach-town") : null);
+      const media = img ? `<div class="card-media">${mediaFigure({
+        url: img.url,
+        alt: img.title,
+        location: img.location,
+        title: img.title,
+        className: ""
+      })}</div>` : "";
+      return `
+      <article class="info-card reveal${img ? " has-media" : ""}">
+        ${media}
+        <div class="${img ? "card-body" : ""}">
+          <h3>${escapeHtml(d.name)}</h3>
+          <p>${escapeHtml(d.detail)}</p>
+          <div class="chip-row">
+            <a class="btn btn-ghost btn-sm" href="${mapsUrl(d.mapsQuery)}" target="_blank" rel="noopener">Google Maps</a>
+          </div>
         </div>
       </article>
-    `).join("");
+    `;
+    }).join("");
   }
 
   function renderStayFood() {
@@ -2702,10 +3510,44 @@
     `;
   }
 
+
+  function renderTips() {
+    const root = $("#tipsRoot");
+    const filters = $("#tipsFilters");
+    if (!root || !filters) return;
+    filters.innerHTML = CONFIG.tipCategories.map((c, i) => `
+      <button class="filter-chip${i === 0 ? " active" : ""}" type="button" data-tip-filter="${c.id}">${escapeHtml(c.label)}</button>
+    `).join("");
+    root.innerHTML = travelTips.map(t => renderTipCard(t)).join("");
+  }
+
+  function renderGallery() {
+    const root = $("#galleryRoot");
+    if (!root) return;
+    const items = travelImages.filter(i => i.role !== "hero");
+    root.innerHTML = items.map(img => `
+      <figure class="gallery-item ${escapeHtml(img.shape || "")} reveal"
+        data-lightbox-src="${escapeHtml(img.url)}"
+        data-lightbox-cap="${escapeHtml(img.title)}"
+        data-lightbox-loc="${escapeHtml(img.location)}">
+        <div class="media-frame">
+          <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="window.__imgFallback && window.__imgFallback(this)" />
+          <div class="media-fallback" aria-hidden="true">Image unavailable<br/><span style="opacity:.7;font-size:.78rem">${escapeHtml(img.location)}</span></div>
+        </div>
+        <figcaption class="gallery-caption">
+          <div class="loc">${escapeHtml(img.location)}</div>
+          <div class="title">${escapeHtml(img.title)}</div>
+        </figcaption>
+      </figure>
+    `).join("");
+  }
+
   function renderMobileMenu() {
     const links = [
       ["#overview", "Tổng quan"],
       ["#itinerary", "Lịch trình"],
+      ["#gallery", "Gallery"],
+      ["#tips", "Travel Tips"],
       ["#route", "Lộ trình"],
       ["#stay-food", "Ở & Ăn"],
       ["#budget", "Chi phí"],
@@ -2861,6 +3703,72 @@
     sections.forEach(s => io.observe(s));
   }
 
+
+  function setupTipsFilter() {
+    const filters = $("#tipsFilters");
+    if (!filters) return;
+    filters.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-tip-filter]");
+      if (!btn) return;
+      $$("#tipsFilters .filter-chip").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      const id = btn.dataset.tipFilter;
+      $$("#tipsRoot .tip-card").forEach(card => {
+        const ok = id === "all" || card.dataset.tipCategory === id;
+        card.classList.toggle("is-filtered-out", !ok);
+      });
+    });
+  }
+
+  window.__imgFallback = function(img) {
+    const frame = img.closest(".media-frame");
+    if (frame) frame.classList.add("is-broken");
+    img.style.display = "none";
+  };
+
+  function openLightbox(src, cap, loc) {
+    const box = $("#lightbox");
+    if (!box || !src) return;
+    $("#lightboxImg").src = src;
+    $("#lightboxImg").alt = cap || "";
+    $("#lightboxCap").textContent = cap || "";
+    $("#lightboxLoc").textContent = loc || "";
+    box.hidden = false;
+    box.classList.add("open");
+    box.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    const box = $("#lightbox");
+    if (!box) return;
+    box.classList.remove("open");
+    box.hidden = true;
+    box.setAttribute("aria-hidden", "true");
+    $("#lightboxImg").removeAttribute("src");
+    document.body.style.overflow = "";
+  }
+
+  function setupLightbox() {
+    document.addEventListener("click", (e) => {
+      const hit = e.target.closest("[data-lightbox-src]");
+      if (!hit) return;
+      if (e.target.closest("a, button")) return;
+      openLightbox(hit.dataset.lightboxSrc, hit.dataset.lightboxCap, hit.dataset.lightboxLoc);
+    });
+    const box = $("#lightbox");
+    const closeBtn = $("#lightboxClose");
+    if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+    if (box) {
+      box.addEventListener("click", (e) => {
+        if (e.target === box) closeLightbox();
+      });
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+    });
+  }
+
   /* =========================================================
      INIT
      ========================================================= */
@@ -2873,6 +3781,8 @@
       renderItinerary();
       renderRoute();
       renderDestinations();
+      renderGallery();
+      renderTips();
       renderStayFood();
       renderTransport();
       renderBudget();
@@ -2892,6 +3802,8 @@
       setupBudgetBars();
       setupMobileMenu();
       setupNavActive();
+      setupTipsFilter();
+      setupLightbox();
       document.body.classList.add("is-ready");
     } catch (err) {
       const el = document.getElementById("bootFallback");
