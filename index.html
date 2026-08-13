@@ -1724,11 +1724,10 @@
       <div class="nav-links" id="navLinks">
         <a href="#overview">Tổng quan</a>
         <a href="#itinerary">Lịch trình</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#tips">Tips</a>
-        <a href="#stay-food">Ở &amp; Ăn</a>
+        <a href="#practical">Ăn · Ở · Đi</a>
+        <a href="#tips">Mẹo hay</a>
         <a href="#budget">Chi phí</a>
-        <a href="#checklist">Checklist</a>
+        <a href="#essentials">Cần nhớ</a>
       </div>
       <div class="topnav-actions">
         <button class="icon-btn print-hide" onclick="window.print()" title="In / Lưu PDF" aria-label="In">
@@ -1763,9 +1762,9 @@
     <section id="overview">
       <div class="container">
         <div class="section-head reveal">
-          <div class="section-label">Trip Overview</div>
-          <h2>Tổng quan chuyến đi</h2>
-          <p>Những thông tin then chốt để nắm nhanh toàn bộ hành trình Cát Bà.</p>
+          <div class="section-label">Tổng quan</div>
+          <h2>Chuyến đi của bạn trong một nhìn</h2>
+          <p>Cát Bà · 15–16/8/2026 · 7 người — nắm nhanh trước khi xem lịch từng ngày.</p>
         </div>
         <div class="overview-grid" id="overviewGrid"></div>
       </div>
@@ -1780,14 +1779,14 @@
     <section id="itinerary">
       <div class="container">
         <div class="section-head reveal">
-          <div class="section-label">Itinerary</div>
-          <h2>Lịch trình chi tiết</h2>
-          <p>Timeline theo từng ngày — từ chuẩn bị hành lý đến lúc về Hà Nội.</p>
+          <div class="section-label">Lịch trình</div>
+          <h2>Từng ngày sẽ đi đâu, làm gì</h2>
+          <p>Theo giờ — từ đêm chuẩn bị hành lý đến lúc về Hà Nội.</p>
         </div>
         <div class="toolbar print-hide reveal">
           <div class="search-box">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
-            <input type="search" id="searchInput" placeholder="Tìm hoạt động, địa điểm, ghi chú..." autocomplete="off" />
+            <input type="search" id="searchInput" placeholder="Tìm hoạt động, địa điểm..." autocomplete="off" />
           </div>
           <div class="filter-chips" id="filterChips"></div>
         </div>
@@ -1795,101 +1794,57 @@
       </div>
     </section>
 
-    <section id="route">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Trip Route</div>
-          <h2>Lộ trình di chuyển</h2>
-          <p>Hành trình từ Hà Nội đến Cát Bà và trở về — theo đúng lịch trình.</p>
-        </div>
-        <div id="routeRoot" class="reveal"></div>
-      </div>
-    </section>
-
-    <section id="destinations">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Destinations</div>
-          <h2>Điểm đến &amp; trải nghiệm</h2>
-          <p>Các địa điểm sẽ đi qua trong chuyến đi.</p>
-        </div>
-        <div class="cards-grid" id="destinationsRoot"></div>
-      </div>
-    </section>
-
     <section id="gallery">
       <div class="container">
         <div class="section-head reveal">
-          <div class="section-label">Trip Gallery</div>
-          <h2>Không khí chuyến đi</h2>
-          <p>Hình ảnh gắn với các điểm trong lịch trình Cát Bà — Vịnh Lan Hạ, bãi Cát Cò và thị trấn.</p>
+          <div class="section-label">Hình ảnh</div>
+          <h2>Không khí Cát Bà &amp; Vịnh Lan Hạ</h2>
+          <p>Vài khung hình gắn với những nơi bạn sẽ tới.</p>
         </div>
         <div class="gallery-grid" id="galleryRoot"></div>
+      </div>
+    </section>
+
+    <section id="practical">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">Ăn · Ở · Di chuyển</div>
+          <h2>Những thứ cần biết ngoài lịch trình</h2>
+          <p>Khách sạn, các bữa ăn đã chốt, xe và vé — gọn trong một chỗ.</p>
+        </div>
+        <div class="cards-grid" id="practicalRoot"></div>
       </div>
     </section>
 
     <section id="tips">
       <div class="container">
         <div class="section-head reveal">
-          <div class="section-label">Travel Tips</div>
-          <h2>Make the most of your trip</h2>
-          <p>Gợi ý gắn với lịch trình 14–16/8/2026 — thời tiết tháng 8, cáp treo, Vịnh Lan Hạ và đặc sản Cát Bà.</p>
+          <div class="section-label">Mẹo hay</div>
+          <h2>Chuẩn bị tốt hơn cho đúng chuyến này</h2>
+          <p>Thời tiết tháng 8, cáp treo, tour vịnh và đặc sản — lọc theo chủ đề nếu cần.</p>
         </div>
-        <div class="tips-filters print-hide reveal" id="tipsFilters" role="tablist" aria-label="Lọc tip theo chủ đề"></div>
+        <div class="tips-filters print-hide reveal" id="tipsFilters" role="tablist" aria-label="Lọc mẹo theo chủ đề"></div>
         <div class="tips-grid" id="tipsRoot"></div>
-      </div>
-    </section>
-
-    <section id="stay-food">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Stay &amp; Food</div>
-          <h2>Nơi ở &amp; ẩm thực</h2>
-          <p>Khách sạn, nhà hàng và các bữa ăn trong lịch trình.</p>
-        </div>
-        <div class="cards-grid" id="stayFoodRoot"></div>
-      </div>
-    </section>
-
-    <section id="transport">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Transport</div>
-          <h2>Di chuyển &amp; vé</h2>
-          <p>Phương tiện và các hạng mục vé đã dự trù.</p>
-        </div>
-        <div class="cards-grid" id="transportRoot"></div>
       </div>
     </section>
 
     <section id="budget">
       <div class="container">
         <div class="section-head reveal">
-          <div class="section-label">Budget</div>
-          <h2>Chi phí dự trù</h2>
-          <p>Tổng hợp theo từng khoản — số liệu lấy trực tiếp từ bảng dự trù.</p>
+          <div class="section-label">Chi phí</div>
+          <h2>Dự trù cho cả đoàn</h2>
+          <p>Tổng ước tính và từng khoản — chưa gồm tiền phòng khách sạn.</p>
         </div>
         <div class="budget-layout reveal" id="budgetRoot"></div>
       </div>
     </section>
 
-    <section id="bookings">
+    <section id="essentials">
       <div class="container">
         <div class="section-head reveal">
-          <div class="section-label">Bookings</div>
-          <h2>Booking &amp; đặt chỗ</h2>
-          <p>Thông tin đặt tour / nhà xe đã ghi nhận.</p>
-        </div>
-        <div class="cards-grid" id="bookingsRoot"></div>
-      </div>
-    </section>
-
-    <section id="checklist">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Checklist</div>
-          <h2>Chuẩn bị hành lý</h2>
-          <p>Danh sách đồ cần mang theo — đánh dấu khi đã chuẩn bị xong.</p>
+          <div class="section-label">Cần nhớ</div>
+          <h2>Checklist, liên hệ &amp; lưu ý cuối</h2>
+          <p>Đánh dấu đồ mang theo và lưu số điện thoại quan trọng.</p>
         </div>
         <div class="checklist-toolbar print-hide reveal">
           <div class="progress-pill" id="checkProgress">0 / 0 hoàn thành</div>
@@ -1898,48 +1853,21 @@
           </div>
         </div>
         <div class="checklist-groups reveal" id="checklistRoot"></div>
-      </div>
-    </section>
-
-    <section id="contacts">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Contacts</div>
-          <h2>Liên hệ quan trọng</h2>
-          <p>Số điện thoại nhà xe và đơn vị tour.</p>
+        <div class="section-head reveal" style="margin-top:2.5rem;margin-bottom:1.25rem">
+          <h2 style="font-size:clamp(1.35rem,2.5vw,1.75rem)">Liên hệ nhanh</h2>
         </div>
         <div class="cards-grid" id="contactsRoot"></div>
-      </div>
-    </section>
-
-    <section id="notes">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Notes</div>
-          <h2>Ghi chú quan trọng</h2>
-          <p>Toàn bộ lưu ý theo từng hoạt động trong chuyến đi.</p>
-        </div>
-        <div id="notesRoot"></div>
-      </div>
-    </section>
-
-    <section id="details">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="section-label">Trip Details</div>
-          <h2>Thông tin bổ sung</h2>
-          <p>Các thông tin khác từ kế hoạch gốc.</p>
-        </div>
-        <div id="detailsRoot"></div>
+        <div id="essentialsNotes" style="margin-top:1.5rem"></div>
       </div>
     </section>
   </main>
+
 
   <footer>
     <div class="container">
       <div class="foot-title">Cát Bà · Nhà Hìn</div>
       <p>Travel Planner · 15–16/8/2026 · 7 người</p>
-      <p style="margin-top:0.5rem;opacity:0.7">Dữ liệu nguồn: Kế hoạch du lịch Cát Bà.xlsx</p>
+      <p style="margin-top:0.5rem;opacity:0.7">Chúc đoàn đi vui và về an toàn.</p>
     </div>
   </footer>
 
@@ -1960,8 +1888,7 @@
 
   <script>
   /* =========================================================
-     DATA — nguồn: Kế hoạch du lịch Cát Bà.xlsx
-     Sheets: Kế hoạch | Chi phí dự trù | Menu nhà hàng
+     TRIP DATA
      ========================================================= */
   const tripData = {
     overview: {
@@ -2285,11 +2212,11 @@
 
     accommodations: [
       {
-        name: "Khách sạn tại Cát Bà (KS)",
-        detail: "Check-in ~10h00 ngày 15/8 · Check-out 13h45–14h00 ngày 16/8. Ăn trưa 15/8 tại nhà hàng của KS.",
-        restaurant: "Nhà hàng Phú Thành (Nhà hàng của KS)",
+        name: "Khách sạn tại Cát Bà",
+        detail: "Nhận phòng khoảng 10:00 ngày 15/8 · Trả phòng 13:45–14:00 ngày 16/8. Ăn trưa 15/8 tại nhà hàng khách sạn.",
+        restaurant: "Nhà hàng Phú Thành",
         nights: "1 đêm (1n1đ)",
-        note: "Chi phí phòng trong bảng dự trù chưa có số tiền cụ thể."
+        note: "Tiền phòng chưa chốt — bổ sung sau khi có giá khách sạn."
       }
     ],
 
@@ -2297,31 +2224,30 @@
       {
         id: "lunch-15",
         when: "Bữa trưa 15/8",
-        place: "Nhà hàng Phú Thành (Nhà hàng của KS) - Menu 1",
-        note: "Theo sheet Menu nhà hàng — đã ghi nhận nhà hàng & menu.",
-        status: "Đã chọn nhà hàng"
+        place: "Nhà hàng Phú Thành (tại khách sạn) · Menu 1",
+        note: "Ăn tại nhà hàng khách sạn, đã chọn Menu 1.",
+        status: "Đã chọn"
       },
       {
         id: "dinner-15",
         when: "Bữa tối 15/8",
         place: null,
-        note: "Trong lịch trình: chọn trước quán (ưu tiên gần quảng trường). Sheet Menu có cột này nhưng chưa điền chi tiết.",
-        status: "Chưa chọn quán cụ thể"
+        note: "Nên chọn trước quán gần quảng trường để tiện dạo biển và xem pháo hoa.",
+        status: "Chưa chọn quán"
       },
       {
         id: "lunch-16",
-        when: "Bữa trưa 15/8",
+        when: "Bữa trưa 16/8",
         place: null,
-        note: "Cột thứ 3 trong sheet Menu nhà hàng (nguyên văn tiêu đề Excel: «Bữa trưa 15/8»). Trong lịch trình ngày 16/8: ăn trưa, nghỉ ngơi nhẹ (chọn trước quán).",
-        status: "Chưa điền chi tiết trong Excel",
-        excelNote: true
+        note: "Ăn trưa trước khi thu đồ và ra cáp treo — nên chọn quán trước.",
+        status: "Chưa chọn quán"
       },
       {
         id: "breakfast-general",
         when: "Ăn sáng",
         place: null,
         note: "15/8: ăn sáng nhẹ trước khi xuất phát. 16/8: ăn sáng tại khách sạn hoặc quán địa phương (chọn trước quán). Dự trù: 60k/người.",
-        status: "Theo lịch trình"
+        status: "Theo lịch"
       }
     ],
 
@@ -2358,7 +2284,7 @@
     expenses: [
       {
         stt: 1,
-        name: "Xe di chuyển khứ hồi từ nhà đến tận KS Cát Bà",
+        name: "Xe khứ hồi Hà Nội — Cát Bà",
         amount: 3000000,
         note: "Nhà xe Sơn Hà (096 3999295)",
         category: "transport"
@@ -2381,9 +2307,9 @@
       },
       {
         stt: 4,
-        name: "Phòng khách sạn 1n1đ",
+        name: "Phòng khách sạn (1 đêm)",
         amount: null,
-        note: "Chưa có số liệu trong Excel",
+        note: "Chưa có số tiền cụ thể",
         category: "stay"
       },
       {
@@ -2411,21 +2337,21 @@
       },
       {
         stt: 8,
-        name: "Di chuyển giữa các điểm chơi hoặc đi bơi (book taxi sẽ rẻ hơn xe điện)",
+        name: "Di chuyển nội đảo (taxi)",
         amount: 500000,
         note: null,
         category: "transport"
       },
       {
         stt: 9,
-        name: "Tiền chơi tối phát sinh (nếu có)",
+        name: "Chi tiêu buổi tối (dự phòng)",
         amount: 500000,
         note: null,
         category: "activity"
       }
     ],
     expenseTotal: 13718000,
-    expenseTotalNote: "Tổng = SUM(C2:C10) trong Excel. Khoản «Phòng khách sạn 1n1đ» chưa có số tiền nên không nằm trong tổng.",
+    expenseTotalNote: "Chưa gồm tiền phòng khách sạn.",
 
     bookings: [
       {
@@ -2434,7 +2360,7 @@
         amount: 3000000,
         phone: "0963999295",
         phoneDisplay: "096 3999295",
-        status: "Đã ghi nhận nhà xe"
+        status: "Đã có nhà xe"
       },
       {
         title: "Tour du thuyền Vịnh Lan Hạ",
@@ -2450,13 +2376,13 @@
         title: "Vé cáp treo",
         detail: "67k/người/lượt × 7 người × 2 lượt.",
         amount: 938000,
-        status: "Dự trù"
+        status: "Dự kiến"
       },
       {
         title: "Phòng khách sạn 1n1đ",
-        detail: "Có trong bảng dự trù nhưng chưa điền chi phí.",
+        detail: "Tiền phòng chưa chốt.",
         amount: null,
-        status: "Chưa có số liệu"
+        status: "Chưa chốt"
       }
     ],
 
@@ -2567,16 +2493,8 @@
 
     additionalInfo: [
       {
-        title: "Nguồn dữ liệu",
-        body: "File Excel gồm 3 sheet:\n• Kế hoạch — lịch trình theo ngày/giờ\n• Chi phí dự trù — 9 khoản + tổng\n• Menu nhà hàng — tiêu đề các bữa và Nhà hàng Phú Thành (Menu 1) cho bữa trưa 15/8"
-      },
-      {
-        title: "Pháo hoa buổi tối 15/8",
-        body: "Dự kiến 20:30 và 21:45, mỗi đợt khoảng 10–15 phút — xem trong lúc dạo chơi trung tâm thị trấn."
-      },
-      {
-        title: "Menu nhà hàng (sheet gốc)",
-        body: "Cột 1: Bữa trưa 15/8 → Nhà hàng Phú Thành (Nhà hàng của KS) - Menu 1\nCột 2: Bữa tối 15/8 → (chưa điền)\nCột 3: Bữa trưa 15/8 → (chưa điền — giữ nguyên tiêu đề như trong Excel)"
+        title: "Pháo hoa tối 15/8",
+        body: "Dự kiến khoảng 20:30 và 21:45, mỗi đợt 10–15 phút — xem khi dạo trung tâm thị trấn."
       }
     ]
   };
@@ -2931,25 +2849,25 @@
     ],
     storageKey: "catba-checklist-v1",
     tipCategories: [
-      { id: "all", label: "ALL" },
-      { id: "local", label: "LOCAL" },
-      { id: "food", label: "FOOD" },
-      { id: "transport", label: "TRANSPORT" },
-      { id: "money", label: "MONEY" },
-      { id: "weather", label: "WEATHER" },
-      { id: "safety", label: "SAFETY" },
-      { id: "culture", label: "CULTURE" },
-      { id: "packing", label: "PACKING" }
+      { id: "all", label: "Tất cả" },
+      { id: "local", label: "Địa điểm" },
+      { id: "food", label: "Ăn uống" },
+      { id: "transport", label: "Di chuyển" },
+      { id: "money", label: "Chi tiêu" },
+      { id: "weather", label: "Thời tiết" },
+      { id: "safety", label: "An toàn" },
+      { id: "culture", label: "Văn hóa" },
+      { id: "packing", label: "Hành lý" }
     ],
     tipCategoryLabels: {
-      local: "Local",
-      food: "Food",
-      transport: "Transport",
-      money: "Money",
-      weather: "Weather",
-      safety: "Safety",
-      culture: "Culture",
-      packing: "Packing"
+      local: "Địa điểm",
+      food: "Ăn uống",
+      transport: "Di chuyển",
+      money: "Chi tiêu",
+      weather: "Thời tiết",
+      safety: "An toàn",
+      culture: "Văn hóa",
+      packing: "Hành lý"
     }
   };
 
@@ -3045,8 +2963,8 @@
       ? `<span class="tip-day-chip">${escapeHtml(dayLabelForTip(tip.day))} · ${escapeHtml(tip.location || "")}</span>`
       : (tip.location ? `<span class="tip-day-chip">${escapeHtml(tip.location)}</span>` : "");
     const source = tip.sourceUrl
-      ? `<a class="tip-source" href="${escapeHtml(tip.sourceUrl)}" target="_blank" rel="noopener">Source · ${escapeHtml(tip.source)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`
-      : (tip.source ? `<span class="tip-source" style="color:var(--charcoal-muted)">Source · ${escapeHtml(tip.source)}</span>` : "");
+      ? `<a class="tip-source" href="${escapeHtml(tip.sourceUrl)}" target="_blank" rel="noopener">Theo · ${escapeHtml(tip.source)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a>`
+      : (tip.source ? `<span class="tip-source" style="color:var(--charcoal-muted)">Theo · ${escapeHtml(tip.source)}</span>` : "");
     return `
       <article class="tip-card${compact ? " compact" : " reveal"}" data-tip-category="${escapeHtml(tip.category)}" data-tip-day="${tip.day ?? ""}">
         <div class="tip-cat ${escapeHtml(tip.category)}">
@@ -3071,7 +2989,7 @@
       `;
     }
     $("#heroContent").innerHTML = `
-      <div class="eyebrow">My Trip</div>
+      <div class="eyebrow">Chuyến đi của Nhà Hìn</div>
       <h1>${escapeHtml(o.destination)}</h1>
       <div class="hero-dest">${escapeHtml(o.destinationsLabel)}</div>
       <div class="hero-meta">
@@ -3088,27 +3006,24 @@
           ${o.members} người · ${escapeHtml(o.brand)}
         </span>
       </div>
-      <p style="max-width:36rem;margin-bottom:1.5rem;opacity:0.88;font-size:1.02rem">${escapeHtml(o.title)}</p>
+      <p style="max-width:36rem;margin-bottom:1.5rem;opacity:0.88;font-size:1.02rem">Hai ngày một đêm: xe từ Hà Nội, cáp treo ra đảo, tour Vịnh Lan Hạ và tắm biển Cát Cò.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#itinerary">Xem lịch trình</a>
-        <a class="btn btn-ghost" href="#tips">Travel tips</a>
-        <a class="btn btn-ghost" href="#budget">Chi phí dự trù</a>
+        <a class="btn btn-ghost" href="#practical">Ăn · Ở · Đi</a>
+        <a class="btn btn-ghost" href="#budget">Xem chi phí</a>
       </div>
     `;
   }
 
   function renderOverview() {
     const o = tripData.overview;
-    const knownExpenses = tripData.expenses.filter(e => e.amount != null);
     const cards = [
-      { label: "Dates", value: o.dateRangeRaw, hint: "Kèm đêm chuẩn bị 14/8" },
-      { label: "Duration", value: `${o.durationDays} ngày · ${o.nights} đêm`, hint: "15–16/8/2026" },
-      { label: "People", value: `${o.members} người`, hint: "Thành viên đoàn" },
-      { label: "Transport", value: "Xe + Cáp treo", hint: "Nhà xe Sơn Hà" },
-      { label: "Budget", value: formatVND(tripData.expenseTotal), hint: "Chưa gồm tiền phòng KS" },
-      { label: "Destinations", value: String(tripData.destinations.length), hint: "Điểm trong hành trình" },
-      { label: "Activities", value: String(tripData.days.reduce((n, d) => n + d.activities.length, 0)), hint: "Mốc trong timeline" },
-      { label: "Stay", value: "1n1đ · KS Cát Bà", hint: "Nhà hàng Phú Thành" }
+      { label: "Thời gian", value: "15–16/8/2026", hint: "Chuẩn bị từ tối 14/8" },
+      { label: "Độ dài", value: `${o.durationDays} ngày · ${o.nights} đêm`, hint: "Cuối tuần ngắn" },
+      { label: "Đoàn", value: `${o.members} người`, hint: "Nhà Hìn" },
+      { label: "Điểm chính", value: "Cát Bà · Lan Hạ", hint: "Tắm biển + tour vịnh" },
+      { label: "Di chuyển", value: "Xe + cáp treo", hint: "Nhà xe Sơn Hà" },
+      { label: "Chi phí", value: formatVND(tripData.expenseTotal), hint: "Chưa gồm tiền phòng" }
     ];
     $("#overviewGrid").innerHTML = cards.map(c => `
       <article class="stat-card reveal">
@@ -3176,7 +3091,7 @@
 
     $("#itineraryRoot").innerHTML = tripData.days.map(d => {
       const dayImg = travelImages.find(i => i.role === "day" && i.day === d.dayNumber);
-      const dayTips = travelTips.filter(t => t.day === d.dayNumber).slice(0, 3);
+      const dayTips = travelTips.filter(t => t.day === d.dayNumber).slice(0, 1);
       const highlight = (dayImg || dayTips.length) ? `
         <div class="day-highlight reveal">
           ${dayImg ? `<div>${mediaFigure({
@@ -3189,7 +3104,7 @@
           })}</div>` : `<div></div>`}
           <div class="day-tips">
             <div class="day-tips-label">${escapeHtml(d.label)} · Tips</div>
-            ${dayTips.length ? dayTips.map(t => renderTipCard(t, { compact: true })).join("") : `<p style="color:var(--charcoal-muted);font-size:0.9rem">Xem thêm gợi ý tại mục Travel Tips.</p>`}
+            ${dayTips.length ? dayTips.map(t => renderTipCard(t, { compact: true })).join("") + `<a class="tip-source" href="#tips" style="margin-top:0.35rem">Xem thêm mẹo hay →</a>` : `<a class="tip-source" href="#tips">Xem mẹo hay cho ngày này →</a>`}
           </div>
         </div>
       ` : "";
@@ -3212,85 +3127,12 @@
     }).join("");
   }
 
-  function renderRoute() {
-    const mobile = tripData.route.map((n, i) => {
-      const isLast = i === tripData.route.length - 1;
-      const mode = n.mode ? `<div class="route-mode">${escapeHtml(n.mode)}</div>` : "";
-      return `
-        ${i > 0 ? mode : ""}
-        <div class="route-node">
-          <div class="route-marker">
-            <div class="route-dot${n.end || isLast ? " end" : ""}"></div>
-            ${!isLast ? '<div class="route-line"></div>' : ""}
-          </div>
-          <div class="route-body">
-            <div class="route-name">${escapeHtml(n.name)}</div>
-            <div class="route-desc">${escapeHtml(n.desc)}</div>
-          </div>
-        </div>
-      `;
-    }).join("");
-
-    const desktop = tripData.route.map((n, i) => {
-      const arrow = i < tripData.route.length - 1
-        ? `<div class="route-arrow">
-            <svg width="28" height="12" viewBox="0 0 28 12" fill="none"><path d="M0 6h24M20 1l6 5-6 5" stroke="currentColor" stroke-width="1.5"/></svg>
-            <span>${escapeHtml(tripData.route[i + 1].mode || "→")}</span>
-          </div>`
-        : "";
-      return `
-        <div class="route-col">
-          <div class="route-dot${n.end ? " end" : ""}" style="margin-bottom:0.75rem"></div>
-          <div class="route-name" style="font-size:1rem">${escapeHtml(n.name)}</div>
-          <div class="route-desc">${escapeHtml(n.desc)}</div>
-        </div>
-        ${arrow}
-      `;
-    }).join("");
-
-    $("#routeRoot").innerHTML = `
-      <div class="route-track mobile-route">${mobile}</div>
-      <div class="route-track desktop-route">${desktop}</div>
-      <div class="maps-actions">
-        <a class="btn btn-primary btn-sm" href="${mapsUrl("Cát Bà Hải Phòng")}" target="_blank" rel="noopener">Mở bản đồ Cát Bà</a>
-        <a class="btn btn-ghost btn-sm" href="${mapsUrl("Vịnh Lan Hạ Cát Bà")}" target="_blank" rel="noopener">Vịnh Lan Hạ</a>
-        <a class="btn btn-ghost btn-sm" href="${mapsUrl(tripData.overview.departureAddress)}" target="_blank" rel="noopener">Điểm xuất phát</a>
-      </div>
-    `;
-  }
-
-  function renderDestinations() {
-    $("#destinationsRoot").innerHTML = tripData.destinations.map(d => {
-      const img = travelImages.find(i => i.destinationMatch === d.name)
-        || (d.name.includes("Lan Hạ") ? travelImages.find(i => i.id === "img-lanha-islands") : null)
-        || (d.name.includes("Cát Cò") ? travelImages.find(i => i.id === "img-catco") : null)
-        || (d.name.includes("Trung tâm") ? travelImages.find(i => i.id === "img-beach-town") : null);
-      const media = img ? `<div class="card-media">${mediaFigure({
-        url: img.url,
-        alt: img.title,
-        location: img.location,
-        title: img.title,
-        className: ""
-      })}</div>` : "";
-      return `
-      <article class="info-card reveal${img ? " has-media" : ""}">
-        ${media}
-        <div class="${img ? "card-body" : ""}">
-          <h3>${escapeHtml(d.name)}</h3>
-          <p>${escapeHtml(d.detail)}</p>
-          <div class="chip-row">
-            <a class="btn btn-ghost btn-sm" href="${mapsUrl(d.mapsQuery)}" target="_blank" rel="noopener">Google Maps</a>
-          </div>
-        </div>
-      </article>
-    `;
-    }).join("");
-  }
-
-  function renderStayFood() {
+  function renderPractical() {
+    const root = $("#practicalRoot");
+    if (!root) return;
     const stay = tripData.accommodations.map(a => `
       <article class="info-card reveal">
-        <div class="section-label" style="margin-bottom:0.4rem">Stay</div>
+        <div class="section-label" style="margin-bottom:0.4rem">Nơi ở</div>
         <h3>${escapeHtml(a.name)}</h3>
         <p>${escapeHtml(a.detail)}</p>
         <div class="chip-row">
@@ -3304,29 +3146,27 @@
     const meals = tripData.meals.map(m => `
       <article class="info-card meal-card reveal">
         <div class="meal-when">${escapeHtml(m.when)}</div>
-        <h3>${escapeHtml(m.place || "Chưa chọn quán cụ thể")}</h3>
+        <h3>${escapeHtml(m.place || "Chưa chọn quán")}</h3>
         <p>${escapeHtml(m.note)}</p>
         <div class="meal-status">${escapeHtml(m.status)}</div>
       </article>
     `).join("");
 
-    $("#stayFoodRoot").innerHTML = stay + meals;
-  }
-
-  function renderTransport() {
-    $("#transportRoot").innerHTML = tripData.transport.map(t => `
+    const transport = tripData.transport.map(t => `
       <article class="info-card reveal">
+        <div class="section-label" style="margin-bottom:0.4rem">Di chuyển</div>
         <h3>${escapeHtml(t.name)}</h3>
         <p>${escapeHtml(t.detail)}</p>
         ${t.provider ? `<p style="margin-top:0.5rem"><strong>${escapeHtml(t.provider)}</strong>${t.phoneDisplay ? ` · <a href="tel:${t.phone}">${escapeHtml(t.phoneDisplay)}</a> <button class="copy-btn" type="button" data-copy="${t.phone}">Sao chép</button>` : ""}</p>` : ""}
         ${t.contact ? `<p style="margin-top:0.35rem">${escapeHtml(t.contact.name)} · <a href="tel:${t.contact.phone}">${escapeHtml(t.contact.phoneDisplay)}</a> <button class="copy-btn" type="button" data-copy="${t.contact.phone}">Sao chép</button></p>` : ""}
         <div class="chip-row">
           ${t.cost != null ? `<span class="chip">${formatVND(t.cost)}</span>` : ""}
-          ${t.formula ? `<span class="chip">${escapeHtml(t.formula)}</span>` : ""}
-          ${t.deposit != null ? `<span class="chip">Cọc ${formatVND(t.deposit)}</span>` : ""}
+          ${t.deposit != null ? `<span class="chip">Đã cọc ${formatVND(t.deposit)}</span>` : ""}
         </div>
       </article>
     `).join("");
+
+    root.innerHTML = stay + meals + transport;
   }
 
   function renderBudget() {
@@ -3344,10 +3184,10 @@
     const summary = `
       <div class="budget-summary">
         <div>
-          <div class="budget-total-label">Tổng chi phí dự trù</div>
+          <div class="budget-total-label">Tổng chi phí</div>
           <div class="budget-total-value">${formatVND(total)}</div>
           <div class="budget-total-note">${escapeHtml(tripData.expenseTotalNote)}</div>
-          <div class="budget-total-note">≈ ${formatVND(Math.round(total / tripData.overview.members))}/người (ước tính theo tổng hiện có)</div>
+          <div class="budget-total-note">Khoảng ${formatVND(Math.round(total / tripData.overview.members))}/người</div>
         </div>
         <div class="budget-chart-wrap">
           <div class="donut" style="background: conic-gradient(${gradient})">
@@ -3368,11 +3208,10 @@
             <article class="expense-item">
               <div class="expense-top">
                 <div class="expense-name">${e.stt}. ${escapeHtml(e.name)}</div>
-                <div class="expense-amount${e.amount == null ? " pending" : ""}">${e.amount != null ? formatVND(e.amount) : "Chưa có số liệu"}</div>
+                <div class="expense-amount${e.amount == null ? " pending" : ""}">${e.amount != null ? formatVND(e.amount) : "Chưa chốt"}</div>
               </div>
               ${e.amount != null ? `<div class="expense-bar"><i data-width="${pct}"></i></div>
               <div class="expense-meta">${pct.toFixed(1)}% tổng</div>` : `<div class="expense-bar"><i data-width="0"></i></div>`}
-              ${e.formula ? `<div class="expense-meta">Công thức: ${escapeHtml(e.formula)}</div>` : ""}
               ${e.note ? `<div class="expense-note">${escapeHtml(e.note)}</div>` : ""}
             </article>
           `;
@@ -3383,22 +3222,26 @@
     $("#budgetRoot").innerHTML = summary + list;
   }
 
-  function renderBookings() {
-    $("#bookingsRoot").innerHTML = tripData.bookings.map(b => `
-      <article class="info-card reveal">
-        <div class="chip-row" style="margin-top:0;margin-bottom:0.6rem">
-          <span class="chip">${escapeHtml(b.status)}</span>
-        </div>
-        <h3>${escapeHtml(b.title)}</h3>
-        <p>${escapeHtml(b.detail)}</p>
-        ${b.amount != null ? `<p style="margin-top:0.6rem;font-weight:650;color:var(--deep-green)">${formatVND(b.amount)}</p>` : ""}
-        ${b.phone ? `<p style="margin-top:0.5rem"><a class="contact-phone" href="tel:${b.phone}">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
-          ${escapeHtml(b.phoneDisplay)}
-        </a> <button class="copy-btn" type="button" data-copy="${b.phone}">Sao chép</button></p>` : ""}
-      </article>
+  function renderEssentialsNotes() {
+    const root = $("#essentialsNotes");
+    if (!root) return;
+    const blocks = [
+      {
+        title: "Địa chỉ xuất phát",
+        body: tripData.overview.departureAddress,
+        maps: tripData.overview.departureAddress
+      },
+      ...tripData.additionalInfo.map(i => ({ title: i.title, body: i.body }))
+    ];
+    root.innerHTML = blocks.map(n => `
+      <div class="note-block reveal">
+        <h4>${escapeHtml(n.title)}</h4>
+        <p>${escapeHtml(n.body)}</p>
+        ${n.maps ? `<div class="maps-actions"><a class="btn btn-ghost btn-sm" href="${mapsUrl(n.maps)}" target="_blank" rel="noopener">Mở Maps</a></div>` : ""}
+      </div>
     `).join("");
   }
+
 
   function loadChecklistState() {
     try {
@@ -3468,48 +3311,6 @@
     `).join("");
   }
 
-  function renderNotes() {
-    const notes = [];
-    tripData.days.forEach(d => {
-      d.activities.forEach(a => {
-        if (a.note) {
-          notes.push({
-            title: `${d.label} · ${a.time} · ${a.title}`,
-            body: a.note
-          });
-        }
-      });
-    });
-    $("#notesRoot").innerHTML = notes.map(n => `
-      <div class="note-block reveal">
-        <h4>${escapeHtml(n.title)}</h4>
-        <p>${escapeHtml(n.body)}</p>
-      </div>
-    `).join("");
-  }
-
-  function renderDetails() {
-    $("#detailsRoot").innerHTML = `
-      <div class="note-block reveal">
-        <h4>Thông tin tổng quan (nguyên văn Excel)</h4>
-        <p>${escapeHtml(tripData.overview.summaryLine)}</p>
-      </div>
-      <div class="note-block reveal">
-        <h4>Địa chỉ xuất phát</h4>
-        <p>${escapeHtml(tripData.overview.departureAddress)}</p>
-        <div class="maps-actions">
-          <a class="btn btn-ghost btn-sm" href="${mapsUrl(tripData.overview.departureAddress)}" target="_blank" rel="noopener">Mở Maps</a>
-        </div>
-      </div>
-      ${tripData.additionalInfo.map(i => `
-        <div class="note-block reveal">
-          <h4>${escapeHtml(i.title)}</h4>
-          <p>${escapeHtml(i.body)}</p>
-        </div>
-      `).join("")}
-    `;
-  }
-
 
   function renderTips() {
     const root = $("#tipsRoot");
@@ -3524,7 +3325,8 @@
   function renderGallery() {
     const root = $("#galleryRoot");
     if (!root) return;
-    const items = travelImages.filter(i => i.role !== "hero");
+    const prefer = ["img-lanha-panorama", "img-catco", "img-floating", "img-beach-town", "img-lanha-islands", "img-harbour"];
+    const items = prefer.map(id => travelImages.find(i => i.id === id)).filter(Boolean);
     root.innerHTML = items.map(img => `
       <figure class="gallery-item ${escapeHtml(img.shape || "")} reveal"
         data-lightbox-src="${escapeHtml(img.url)}"
@@ -3546,14 +3348,11 @@
     const links = [
       ["#overview", "Tổng quan"],
       ["#itinerary", "Lịch trình"],
-      ["#gallery", "Gallery"],
-      ["#tips", "Travel Tips"],
-      ["#route", "Lộ trình"],
-      ["#stay-food", "Ở & Ăn"],
+      ["#gallery", "Hình ảnh"],
+      ["#practical", "Ăn · Ở · Đi"],
+      ["#tips", "Mẹo hay"],
       ["#budget", "Chi phí"],
-      ["#checklist", "Checklist"],
-      ["#contacts", "Liên hệ"],
-      ["#notes", "Ghi chú"]
+      ["#essentials", "Cần nhớ"]
     ];
     $("#mobileMenu").innerHTML = links.map(([href, label]) =>
       `<a href="${href}">${label}</a>`
@@ -3774,23 +3573,18 @@
      ========================================================= */
   function init() {
     try {
-      document.title = tripData.overview.title;
+      document.title = "Cát Bà · Nhà Hìn — Kế hoạch chuyến đi";
       renderHero();
       renderOverview();
       renderDayNav();
       renderItinerary();
-      renderRoute();
-      renderDestinations();
       renderGallery();
+      renderPractical();
       renderTips();
-      renderStayFood();
-      renderTransport();
       renderBudget();
-      renderBookings();
       renderChecklist();
       renderContacts();
-      renderNotes();
-      renderDetails();
+      renderEssentialsNotes();
       renderMobileMenu();
 
       setupDayNav();
