@@ -1833,7 +1833,7 @@
         <div class="section-head reveal">
           <div class="section-label">Chi phí</div>
           <h2>Dự trù cho cả đoàn</h2>
-          <p>Tổng ước tính và từng khoản — chưa gồm tiền phòng khách sạn.</p>
+          <p>Tổng ước tính và từng khoản cho cả đoàn, gồm tiền phòng.</p>
         </div>
         <div class="budget-layout reveal" id="budgetRoot"></div>
       </div>
@@ -2216,7 +2216,7 @@
         detail: "Nhận phòng khoảng 10:00 ngày 15/8 · Trả phòng 13:45–14:00 ngày 16/8. Ăn trưa 15/8 tại nhà hàng khách sạn.",
         restaurant: "Nhà hàng Phú Thành",
         nights: "1 đêm (1n1đ)",
-        note: "Tiền phòng chưa chốt — bổ sung sau khi có giá khách sạn."
+        note: "1.200.000đ / phòng · 1 đêm (1n1đ)."
       }
     ],
 
@@ -2308,8 +2308,8 @@
       {
         stt: 4,
         name: "Phòng khách sạn (1 đêm)",
-        amount: null,
-        note: "Chưa có số tiền cụ thể",
+        amount: 1200000,
+        note: "1.200.000đ / phòng",
         category: "stay"
       },
       {
@@ -2350,8 +2350,8 @@
         category: "activity"
       }
     ],
-    expenseTotal: 13718000,
-    expenseTotalNote: "Chưa gồm tiền phòng khách sạn.",
+    expenseTotal: 14918000,
+    expenseTotalNote: "Đã gồm tiền phòng 1.200.000đ / phòng.",
 
     bookings: [
       {
@@ -2380,9 +2380,9 @@
       },
       {
         title: "Phòng khách sạn 1n1đ",
-        detail: "Tiền phòng chưa chốt.",
-        amount: null,
-        status: "Chưa chốt"
+        detail: "1.200.000đ / phòng · 1 đêm.",
+        amount: 1200000,
+        status: "Đã có giá"
       }
     ],
 
@@ -3023,7 +3023,7 @@
       { label: "Đoàn", value: `${o.members} người`, hint: "Nhà Hìn" },
       { label: "Điểm chính", value: "Cát Bà · Lan Hạ", hint: "Tắm biển + tour vịnh" },
       { label: "Di chuyển", value: "Xe + cáp treo", hint: "Nhà xe Sơn Hà" },
-      { label: "Chi phí", value: formatVND(tripData.expenseTotal), hint: "Chưa gồm tiền phòng" }
+      { label: "Chi phí", value: formatVND(tripData.expenseTotal), hint: "Đã gồm tiền phòng" }
     ];
     $("#overviewGrid").innerHTML = cards.map(c => `
       <article class="stat-card reveal">
