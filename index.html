@@ -1176,7 +1176,20 @@
       color: var(--cream);
     }
 
-    .activity.hidden-filter { display: none; }
+    .activity.hidden-filter,
+    .day-section.hidden-filter { display: none; }
+
+    .itinerary-empty {
+      text-align: center;
+      padding: 2.25rem 1rem 2.75rem;
+      color: var(--charcoal-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .itinerary-empty[hidden] { display: none; }
+
+    .itinerary-empty p { margin: 0 0 0.9rem; }
 
     /* ===== NOTES / MEALS / EXTRA ===== */
     .meal-card .meal-when {
@@ -1789,6 +1802,11 @@
             <input type="search" id="searchInput" placeholder="Tìm hoạt động, địa điểm..." autocomplete="off" />
           </div>
           <div class="filter-chips" id="filterChips"></div>
+          <button class="btn btn-ghost btn-sm" id="resetItineraryFilter" type="button" hidden>Đặt lại</button>
+        </div>
+        <div id="itineraryEmpty" class="itinerary-empty print-hide" hidden>
+          <p>Không tìm thấy hoạt động phù hợp với tìm kiếm / bộ lọc hiện tại.</p>
+          <button class="btn btn-ghost btn-sm" type="button" data-reset-itinerary>Xem lại toàn bộ lịch trình</button>
         </div>
         <div id="itineraryRoot"></div>
       </div>
@@ -2890,6 +2908,36 @@
       .replace(/"/g, "&quot;");
   }
 
+  /** Case-insensitive + Vietnamese diacritic-insensitive search text */
+  function normalizeSearch(str) {
+    return String(str ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "d")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function activitySearchText(a) {
+    const parts = [
+      a.title,
+      a.detail,
+      a.note,
+      a.mapsQuery,
+      a.time,
+      CONFIG.categoryLabels[a.category],
+      a.category
+    ];
+    if (a.subEvents?.length) {
+      a.subEvents.forEach(s => {
+        parts.push(s.time, s.detail);
+      });
+    }
+    return normalizeSearch(parts.filter(Boolean).join(" "));
+  }
+
   function mapsUrl(query) {
     return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query);
   }
@@ -3062,7 +3110,7 @@
     const collapsed = a.collapsible ? " collapsed" : "";
 
     return `
-      <article class="activity" data-category="${a.category}" data-search="${escapeHtml((a.title + " " + (a.detail || "") + " " + (a.note || "")).toLowerCase())}">
+      <article class="activity" data-category="${a.category}" data-search="${escapeHtml(activitySearchText(a))}">
         <div class="activity-dot" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${iconForCategory(a.category)}</svg>
         </div>
@@ -3387,26 +3435,66 @@
   function setupFilters() {
     let activeFilter = "all";
     const input = $("#searchInput");
+    const chipsRoot = $("#filterChips");
+    const emptyEl = $("#itineraryEmpty");
+    const resetBtn = $("#resetItineraryFilter");
+    if (!input || !chipsRoot) return;
 
-    function apply() {
-      const q = (input.value || "").trim().toLowerCase();
-      $$(".activity").forEach(el => {
-        const catOk = activeFilter === "all" || el.dataset.category === activeFilter;
-        const searchOk = !q || (el.dataset.search || "").includes(q);
-        el.classList.toggle("hidden-filter", !(catOk && searchOk));
-      });
+    function isFiltered() {
+      return activeFilter !== "all" || !!normalizeSearch(input.value);
     }
 
-    $$(".filter-chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        $$(".filter-chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        activeFilter = chip.dataset.filter;
-        apply();
+    function apply() {
+      const q = normalizeSearch(input.value);
+      let visibleCount = 0;
+
+      $$("#itineraryRoot .activity").forEach(el => {
+        const catOk = activeFilter === "all" || el.dataset.category === activeFilter;
+        const hay = el.dataset.search || "";
+        const searchOk = !q || hay.includes(q);
+        const show = catOk && searchOk;
+        el.classList.toggle("hidden-filter", !show);
+        if (show) visibleCount += 1;
       });
+
+      $$("#itineraryRoot .day-section").forEach(section => {
+        const hasVisible = $$(".activity:not(.hidden-filter)", section).length > 0;
+        section.classList.toggle("hidden-filter", !hasVisible);
+      });
+
+      const filtered = isFiltered();
+      if (resetBtn) resetBtn.hidden = !filtered;
+      if (emptyEl) emptyEl.hidden = !(filtered && visibleCount === 0);
+    }
+
+    function reset() {
+      activeFilter = "all";
+      input.value = "";
+      $$("#filterChips .filter-chip").forEach(c => {
+        c.classList.toggle("active", c.dataset.filter === "all");
+      });
+      apply();
+      input.focus();
+    }
+
+    chipsRoot.addEventListener("click", (e) => {
+      const chip = e.target.closest("[data-filter]");
+      if (!chip || !chipsRoot.contains(chip)) return;
+      $$("#filterChips .filter-chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      activeFilter = chip.dataset.filter || "all";
+      apply();
     });
 
     input.addEventListener("input", apply);
+    input.addEventListener("search", apply);
+
+    resetBtn?.addEventListener("click", reset);
+    emptyEl?.addEventListener("click", (e) => {
+      if (e.target.closest("[data-reset-itinerary]")) reset();
+    });
+
+    apply();
   }
 
   function setupToggles() {
